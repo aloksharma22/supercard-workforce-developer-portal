@@ -1,7 +1,5 @@
 # Webhooks
 
-# Webhooks
-
 ## Overview
 
 The Supercard Workforce API currently does **not** support webhooks.
