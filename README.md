@@ -1,144 +1,129 @@
-# Supercard Workforce Developer Portal
+# 🚀 Supercard Workforce Developer Portal
 
-> Enterprise-grade REST API Developer Portal built with **OpenAPI 3.1**, **MkDocs Material**, and **Redocly**.
+A modern, enterprise-style API documentation portal for the **Supercard Workforce Management API**, built using **OpenAPI 3.0**, **MkDocs Material**, and **Redocly**.
 
-[![OpenAPI](https://img.shields.io/badge/OpenAPI-3.1-6BA539?logo=openapiinitiative&logoColor=white)](https://www.openapis.org/)
-[![MkDocs](https://img.shields.io/badge/MkDocs-Material-526CFE?logo=materialformkdocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
-[![Redocly](https://img.shields.io/badge/Redocly-API%20Reference-EF5B25)](https://redocly.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+This project demonstrates how to design, document, validate, and publish production-quality REST APIs using industry-standard documentation practices.
 
 ---
 
-## Overview
+## 📖 Overview
 
-The **Supercard Workforce Developer Portal** is a production-style API documentation project designed for a modern Workforce Management platform.
+The Supercard Workforce API enables organizations to integrate workforce management capabilities into custom applications.
 
-It demonstrates how enterprise developer documentation is planned, structured, and maintained using industry-standard tools such as **OpenAPI**, **MkDocs Material**, and **Redocly**.
-
-The portal includes interactive API documentation, modular OpenAPI specifications, onboarding guides, conceptual documentation, reusable API components, and comprehensive developer resources.
+The documentation portal includes complete API references, authentication guides, request and response schemas, reusable OpenAPI components, and interactive developer documentation.
 
 ---
 
-## Features
+## ✨ Features
 
-- Enterprise-style Developer Portal
-- Modular OpenAPI 3.1 Specification
-- Interactive API Reference (Redoc)
-- MkDocs Material Documentation Site
-- REST API Best Practices
-- OAuth 2.0 Authentication Guide
-- Request & Response Examples
-- Error Handling Documentation
-- Pagination, Filtering & Sorting Guides
-- SDK & Integration Guides
-- Versioning Strategy
-- Postman Collection
-- Mobile-friendly Documentation
-- Dark Mode Support
+- 📘 OpenAPI 3.0 Specification
+- 📚 Modular API Documentation
+- 🔐 OAuth 2.0 Bearer Authentication
+- 👨‍💼 Employee Management APIs
+- 🏢 Department Management APIs
+- 🕒 Attendance Management APIs
+- 🌴 Leave Management APIs
+- 💰 Payroll APIs
+- 📊 Reporting APIs
+- 🧩 Reusable Schemas & Components
+- 📦 Request Bodies & Responses
+- 📝 API Examples
+- 🚨 Standardized Error Responses
+- 🔎 Built-in Search
+- 🌙 Responsive Material Design UI
+- ⚡ Static Site Generation using MkDocs
+- ✅ OpenAPI Validation using Redocly
 
 ---
 
-## Project Structure
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| OpenAPI 3.0 | API Specification |
+| YAML | API Definitions |
+| MkDocs Material | Documentation Website |
+| Redocly CLI | OpenAPI Validation & Bundling |
+| Python | Documentation Server |
+| Git | Version Control |
+| GitHub | Repository Hosting |
+
+---
+
+## 📂 Project Structure
 
 ```text
 Supercard Workforce Developer Portal
 │
 ├── docs/
 │   ├── api-reference/
-│   ├── concepts/
-│   ├── reference/
-│   └── assets/
+│   ├── authentication.md
+│   ├── errors.md
+│   ├── faq.md
+│   ├── webhooks.md
+│   └── index.md
 │
 ├── openapi/
-│   ├── paths/
 │   ├── components/
+│   │   ├── examples/
+│   │   ├── requestBodies/
+│   │   ├── schemas/
+│   │   ├── parameters.yaml
+│   │   ├── responses.yaml
+│   │   └── security.yaml
+│   │
+│   ├── paths/
 │   └── openapi.yaml
-│
-├── postman/
-│
-├── dist/
 │
 ├── mkdocs.yml
 ├── README.md
-└── requirements.txt
+└── .gitignore
 ```
 
 ---
 
-## Documentation Sections
-
-| Section | Description |
-|----------|-------------|
-| Home | Introduction to the developer portal |
-| Getting Started | Initial setup and prerequisites |
-| Authentication | OAuth 2.0 authentication |
-| Quick Start | Make your first API request |
-| OpenAPI Explorer | Interactive API documentation |
-| API Reference | Complete endpoint documentation |
-| Concepts | Pagination, Filtering, Sorting, Versioning |
-| Reference | Headers, Status Codes, Error Codes |
-| SDK Guide | Integration guidance |
-| FAQ | Frequently Asked Questions |
-| Changelog | Documentation updates |
-| Release Notes | Product releases |
-
----
-
-## API Modules
-
-The portal documents the following API domains:
+## 📑 API Modules
 
 - Employees
 - Departments
 - Attendance
-- Leave Management
+- Leaves
 - Payroll
 - Reports
 
-Each module contains:
-
-- Overview
-- Endpoint Documentation
-- Request Examples
-- Response Examples
-- Error Responses
-- Business Rules
-- Related APIs
-
 ---
 
-## Technology Stack
+## 🔒 Authentication
 
-| Technology | Purpose |
-|------------|---------|
-| OpenAPI 3.1 | API Specification |
-| MkDocs Material | Documentation Portal |
-| Redocly | Interactive API Reference |
-| YAML | API Definition |
-| Markdown | Documentation |
-| Python | MkDocs Build System |
+The API uses **OAuth 2.0 Bearer Token Authentication**.
 
----
+Example:
 
-## Local Development
-
-### Clone Repository
-
-```bash
-git clone https://github.com/<your-username>/supercard-workforce-developer-portal.git
-
-cd supercard-workforce-developer-portal
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
 ---
+
+## 🚀 Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/<aloksharma22>/<supercard-workforce-developer-portal>.git
+```
+
+### Navigate to the Project
+
+```bash
+cd supercard-workforce-developer-portal
+```
 
 ### Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install mkdocs-material
 ```
-
----
 
 ### Start Local Server
 
@@ -146,7 +131,7 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 
-Documentation will be available at
+Visit:
 
 ```
 http://127.0.0.1:8000
@@ -154,104 +139,84 @@ http://127.0.0.1:8000
 
 ---
 
-### Build Static Site
+## 📄 Build Documentation
 
 ```bash
 mkdocs build
 ```
 
-The generated website will be available inside the `site/` directory.
+The generated documentation will be available inside:
 
----
-
-## OpenAPI Explorer
-
-Generate the bundled OpenAPI specification:
-
-```bash
-redocly bundle openapi/openapi.yaml -o dist/openapi.yaml
 ```
-
-Generate the interactive API reference:
-
-```bash
-redocly build-docs dist/openapi.yaml -o docs/api-reference/index.html
+site/
 ```
 
 ---
 
-## Documentation Principles
+## 🔍 Validate OpenAPI Specification
 
-This project follows enterprise documentation best practices:
-
-- Task-oriented documentation
-- Consistent terminology
-- Modular OpenAPI design
-- Reusable components
-- Developer-first writing
-- Information architecture
-- REST API standards
-- Accessible documentation
-- Maintainable documentation
+```bash
+redocly lint openapi/openapi.yaml
+```
 
 ---
 
-## Screenshots
+## 📷 Screenshots
 
-> Screenshots will be added after deployment.
+> Add screenshots of your documentation portal here.
 
-- Home Page
-- API Explorer
-- Employees API
-- Authentication Guide
-- Dark Mode
+Example:
 
----
-
-## Future Enhancements
-
-- Search Optimization
-- SDK Code Samples
-- Mermaid Architecture Diagrams
-- Sequence Diagrams
-- Interactive Tutorials
-- API Change Log
-- CI/CD Deployment
-- GitHub Pages Deployment
+```
+docs/images/homepage.png
+docs/images/api-reference.png
+docs/images/employees-api.png
+```
 
 ---
 
-## Contributing
+## 🎯 Learning Objectives
 
-Contributions, issues, and suggestions are welcome.
+This project demonstrates:
 
-Please open an issue before submitting significant changes.
-
----
-
-## License
-
-This project is licensed under the **MIT License**.
-
----
-
-## About
-
-This project was created as a portfolio piece demonstrating skills in:
-
+- Modular OpenAPI Design
+- Enterprise API Documentation
+- REST API Best Practices
+- Reusable Components
+- Documentation Architecture
+- API Validation
 - Technical Writing
-- API Documentation
-- Developer Documentation
-- OpenAPI Specification
-- Information Architecture
-- Content Strategy
-- Documentation-as-Code
-- Developer Experience (DX)
+- Git & GitHub Workflow
 
 ---
 
-**Author**
+## 📈 Future Improvements
+
+- Interactive API Console
+- Webhook Documentation
+- SDK Documentation
+- Postman Collection Download
+- API Changelog
+- Versioned Documentation
+- Dark/Light Theme Toggle
+
+---
+
+## 👨‍💻 Author
 
 **Alok Sharma**
 
-Technical Writer • API Documentation • Content Strategy • OpenAPI
+- GitHub: https://github.com/<your-username>
+- LinkedIn: https://www.linkedin.com/in/<your-linkedin>
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
