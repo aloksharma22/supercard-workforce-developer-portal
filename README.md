@@ -1,5 +1,10 @@
 # 🚀 Supercard Workforce Developer Portal
 
+## 🔗 Project Links
+
+- 🌐 **Live Demo:** [View Documentation Portal](https://aloksharma22.github.io/supercard-workforce-developer-portal/)
+- 📂 **Source Code:** [GitHub Repository](https://github.com/aloksharma22/supercard-workforce-developer-portal)
+
 A modern, enterprise-style API documentation portal for the **Supercard Workforce Management API**, built using **OpenAPI 3.0**, **MkDocs Material**, and **Redocly**.
 
 This project demonstrates how to design, document, validate, and publish production-quality REST APIs using industry-standard documentation practices.
