@@ -167,7 +167,7 @@ redocly lint openapi/openapi.yaml
 
 <h3>🏠 Homepage</h3>
 <p align="center">
-  <img src="docs/assets/images/homepage-snapshot.png" width="900">
+  <img src="docs/assets/images/home-page-snapshot.png" width="900">
 </p>
 
 <h3>📖 API Reference</h3>
