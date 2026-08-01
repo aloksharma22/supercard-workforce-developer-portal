@@ -1,0 +1,477 @@
+# Glossary
+
+!!! success "Reference Guide"
+    This glossary defines common terms, acronyms, and concepts used throughout the Supercard Workforce API documentation.
+
+The glossary provides a single source of truth for technical, HR, payroll, attendance, authentication, and API terminology.
+
+---
+
+# A
+
+## API
+
+**Application Programming Interface.**
+
+A collection of endpoints that allow client applications to communicate with the Supercard Workforce platform.
+
+---
+
+## API Version
+
+A numbered release of the API.
+
+Example:
+
+```
+/v1/employees
+```
+
+---
+
+## Access Token
+
+A temporary credential issued after successful authentication.
+
+Access tokens are sent using the `Authorization` header.
+
+Example:
+
+```http
+Authorization: Bearer ACCESS_TOKEN
+```
+
+---
+
+## Attendance Record
+
+A record containing an employee's clock-in, clock-out, working hours, and attendance status.
+
+---
+
+# B
+
+## Bearer Token
+
+An OAuth 2.0 access token transmitted using the HTTP Authorization header.
+
+---
+
+## Business Rules
+
+Application-specific rules that determine whether a request is permitted.
+
+Example:
+
+- Leave balance must be sufficient.
+- Payroll cannot be generated twice for the same period.
+
+---
+
+# C
+
+## Client
+
+An application that communicates with the Supercard Workforce API.
+
+Examples:
+
+- Web application
+- Mobile application
+- HR portal
+- Third-party integration
+
+---
+
+## Correlation ID
+
+A client-generated identifier used to trace a request across multiple services.
+
+Example:
+
+```
+X-Correlation-ID
+```
+
+---
+
+# D
+
+## Department
+
+An organizational unit that groups employees.
+
+Examples:
+
+- Engineering
+- Finance
+- Human Resources
+- Marketing
+
+---
+
+## Deprecation
+
+The process of marking an API version or feature for future removal while continuing to support it for a limited period.
+
+---
+
+# E
+
+## Employee
+
+A workforce member managed within the Supercard Workforce system.
+
+---
+
+## Endpoint
+
+A URL representing a specific API operation.
+
+Example:
+
+```
+GET /v1/employees
+```
+
+---
+
+## Export Job
+
+An asynchronous task responsible for generating downloadable reports.
+
+---
+
+# H
+
+## HTTP
+
+**Hypertext Transfer Protocol**
+
+The communication protocol used by the API.
+
+---
+
+## HTTP Status Code
+
+A standardized response indicating the result of an HTTP request.
+
+Examples:
+
+- 200 OK
+- 404 Not Found
+- 500 Internal Server Error
+
+---
+
+# I
+
+## Idempotency
+
+A property that allows the same request to be safely repeated without causing duplicate operations.
+
+Implemented using:
+
+```
+Idempotency-Key
+```
+
+---
+
+## ISO 8601
+
+The international standard used for dates and timestamps.
+
+Example:
+
+```
+2025-02-06T15:30:45Z
+```
+
+---
+
+# J
+
+## JSON
+
+**JavaScript Object Notation**
+
+The data format used for nearly all request and response payloads.
+
+---
+
+# M
+
+## Metadata
+
+Supplementary information describing a response.
+
+Typical metadata includes:
+
+- requestId
+- correlationId
+- timestamp
+- apiVersion
+
+---
+
+# O
+
+## OAuth 2.0
+
+The authentication framework used by the Supercard Workforce API.
+
+OAuth 2.0 provides secure access using bearer tokens.
+
+---
+
+# P
+
+## Pagination
+
+A technique for splitting large collections into smaller pages.
+
+Common parameters:
+
+```
+page
+pageSize
+```
+
+---
+
+## Payroll
+
+The process of calculating employee compensation, deductions, taxes, and net salary.
+
+---
+
+## Payroll Period
+
+The month for which payroll is generated.
+
+Format:
+
+```
+YYYY-MM
+```
+
+Example:
+
+```
+2025-02
+```
+
+---
+
+# R
+
+## Rate Limiting
+
+A mechanism that limits the number of API requests allowed during a specific time window.
+
+---
+
+## Report Job
+
+An asynchronous background task used to generate reports.
+
+---
+
+## Request
+
+An HTTP message sent from a client to the API.
+
+---
+
+## Response
+
+The HTTP message returned by the API after processing a request.
+
+---
+
+## Resource
+
+Any object managed by the API.
+
+Examples:
+
+- Employee
+- Department
+- Attendance Record
+- Leave Request
+- Payroll Record
+- Report
+
+---
+
+# S
+
+## Sorting
+
+Ordering API results by a specified field.
+
+Example:
+
+```
+sortBy=employeeName
+order=asc
+```
+
+---
+
+## Status Code
+
+An HTTP response code indicating whether an operation succeeded or failed.
+
+---
+
+# T
+
+## Timestamp
+
+A specific date and time represented using ISO 8601.
+
+Example:
+
+```
+2025-02-06T15:30:45Z
+```
+
+---
+
+# U
+
+## URI
+
+**Uniform Resource Identifier**
+
+The path used to identify an API resource.
+
+Example:
+
+```
+/v1/employees
+```
+
+---
+
+## UTC
+
+**Coordinated Universal Time**
+
+The standard time zone used throughout the API.
+
+Example:
+
+```
+2025-02-06T15:30:45Z
+```
+
+---
+
+# V
+
+## Validation
+
+The process of verifying that request data conforms to API requirements.
+
+---
+
+## Versioning
+
+A strategy for evolving the API while maintaining backward compatibility.
+
+Example:
+
+```
+/v1/
+/v2/
+```
+
+---
+
+# W
+
+## Webhook
+
+A future capability that enables the API to send real-time event notifications to client applications.
+
+---
+
+# X
+
+## X-Correlation-ID
+
+A request header supplied by the client for distributed request tracing.
+
+---
+
+## X-Request-ID
+
+A unique identifier generated by the API for every request.
+
+---
+
+# Common Acronyms
+
+| Acronym | Meaning |
+|----------|---------|
+| API | Application Programming Interface |
+| CSV | Comma-Separated Values |
+| HR | Human Resources |
+| HTTP | Hypertext Transfer Protocol |
+| HTTPS | Hypertext Transfer Protocol Secure |
+| JSON | JavaScript Object Notation |
+| OAuth | Open Authorization |
+| PDF | Portable Document Format |
+| URI | Uniform Resource Identifier |
+| URL | Uniform Resource Locator |
+| UTC | Coordinated Universal Time |
+| UUID | Universally Unique Identifier |
+| XLSX | Microsoft Excel Open XML Workbook |
+
+---
+
+# Related References
+
+- [HTTP Status Codes](status-codes.md)
+- [Error Codes](error-codes.md)
+- [Headers](headers.md)
+- [Response Format](response-format.md)
+- [Date and Time Formats](date-formats.md)
+
+---
+
+# Related Concepts
+
+- [Pagination](../concepts/pagination.md)
+- [Filtering](../concepts/filtering.md)
+- [Sorting](../concepts/sorting.md)
+- [Rate Limiting](../concepts/rate-limiting.md)
+- [Error Handling](../concepts/error-handling.md)
+- [Idempotency](../concepts/idempotency.md)
+- [Versioning](../concepts/versioning.md)
+- [Webhooks](../concepts/webhooks.md)
+
+---
+
+!!! tip "Use the Glossary"
+
+    If you encounter an unfamiliar term while reading the documentation, refer to this glossary for its definition before proceeding.
+
+---
+
+!!! note "Consistent Terminology"
+
+    The definitions in this glossary are used consistently throughout the Supercard Workforce API documentation to provide a predictable and easy-to-understand developer experience.
+
+---
+
+# Next Steps
+
+You have completed the **Reference** section.
+
+Continue to the **OpenAPI Specification** to explore the machine-readable API definition and integration tools.
+
+➡ **Next:** OpenAPI Specification (`openapi.yaml`)

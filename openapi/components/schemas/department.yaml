@@ -1,0 +1,64 @@
+Department:
+  type: object
+  description: Represents an organizational department within the Supercard Workforce Management platform.
+
+  properties:
+
+    departmentId:
+      $ref: "./common.yaml#/Identifier"
+
+    departmentCode:
+      type: string
+      description: Unique department code.
+      example: DEPT-ENG
+
+    departmentName:
+      type: string
+      description: Name of the department.
+      example: Engineering
+      minLength: 2
+      maxLength: 100
+
+    description:
+      type: string
+      description: Brief description of the department.
+      example: Responsible for software design, development, and maintenance.
+
+    managerId:
+      $ref: "./common.yaml#/Identifier"
+
+    managerName:
+      type: string
+      readOnly: true
+      description: Name of the department manager.
+      example: Jane Smith
+
+    employeeCount:
+      type: integer
+      readOnly: true
+      description: Total number of employees assigned to the department.
+      example: 42
+
+    location:
+      type: string
+      description: Primary office location of the department.
+      example: Vadodara
+
+    budget:
+      $ref: "./common.yaml#/Money"
+
+    status:
+      $ref: "./common.yaml#/Status"
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+    updatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - departmentId
+    - departmentCode
+    - departmentName
+    - managerId
+    - status

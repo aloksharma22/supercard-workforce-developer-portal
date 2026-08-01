@@ -1,0 +1,141 @@
+Employee:
+  type: object
+  description: Represents an employee within the Supercard Workforce Management platform.
+
+  properties:
+
+    employeeId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeCode:
+      type: string
+      description: Unique employee code assigned by the organization.
+      example: EMP-1001
+
+    firstName:
+      type: string
+      description: Employee's first name.
+      example: John
+      minLength: 1
+      maxLength: 50
+
+    lastName:
+      type: string
+      description: Employee's last name.
+      example: Doe
+      minLength: 1
+      maxLength: 50
+
+    fullName:
+      type: string
+      readOnly: true
+      description: Full name of the employee.
+      example: John Doe
+
+    email:
+      type: string
+      format: email
+      description: Official email address.
+      example: john.doe@supercard.com
+
+    phone:
+      type: string
+      description: Employee's contact number.
+      example: "+91-9876543210"
+
+    dateOfBirth:
+      $ref: "./common.yaml#/Date"
+
+    gender:
+      type: string
+      description: Gender of the employee.
+      enum:
+        - Male
+        - Female
+        - Other
+      example: Male
+
+    designation:
+      type: string
+      description: Job title of the employee.
+      example: Software Engineer
+
+    departmentId:
+      $ref: "./common.yaml#/Identifier"
+
+    departmentName:
+      type: string
+      readOnly: true
+      description: Name of the employee's department.
+      example: Engineering
+
+    managerId:
+      $ref: "./common.yaml#/Identifier"
+
+    employmentType:
+      type: string
+      description: Employment category.
+      enum:
+        - Full-Time
+        - Part-Time
+        - Contract
+        - Intern
+      example: Full-Time
+
+    joiningDate:
+      $ref: "./common.yaml#/Date"
+
+    status:
+      $ref: "./common.yaml#/Status"
+
+    salary:
+      $ref: "./common.yaml#/Money"
+
+    address:
+      type: object
+      description: Employee mailing address.
+
+      properties:
+
+        line1:
+          type: string
+          example: 101 Business Park
+
+        line2:
+          type: string
+          nullable: true
+          example: Tower B
+
+        city:
+          type: string
+          example: Vadodara
+
+        state:
+          type: string
+          example: Gujarat
+
+        postalCode:
+          type: string
+          example: "390010"
+
+        country:
+          type: string
+          example: India
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+    updatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - employeeId
+    - employeeCode
+    - firstName
+    - lastName
+    - email
+    - designation
+    - departmentId
+    - joiningDate
+    - employmentType
+    - status

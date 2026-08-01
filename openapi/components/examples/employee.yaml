@@ -1,0 +1,161 @@
+Employee:
+  summary: Employee Resource
+
+  value:
+
+    success: true
+    message: Employee retrieved successfully.
+
+    data:
+
+      employeeId: 101
+      employeeCode: EMP-1001
+      firstName: John
+      lastName: Doe
+      fullName: John Doe
+      email: john.doe@supercard.com
+      phone: "+91-9876543210"
+      dateOfBirth: "1998-06-15"
+      gender: Male
+      designation: Software Engineer
+      departmentId: 10
+      departmentName: Engineering
+      managerId: 2
+      employmentType: Full-Time
+      joiningDate: "2026-07-30"
+      status: Active
+      salary: 75000
+      address:
+        line1: 101 Business Park
+        line2: Tower B
+        city: Vadodara
+        state: Gujarat
+        postalCode: "390010"
+        country: India
+      createdAt: "2026-07-30T10:15:30Z"
+      updatedAt: "2026-07-30T10:15:30Z"
+
+    metadata:
+
+      requestId: REQ-20260730-AB98765
+      timestamp: "2026-07-30T10:16:00Z"
+
+EmployeeList:
+  summary: Employee Collection
+
+  value:
+
+    success: true
+    message: Employees retrieved successfully.
+
+    data:
+
+      - employeeId: 101
+        employeeCode: EMP-1001
+        firstName: John
+        lastName: Doe
+        fullName: John Doe
+        email: john.doe@supercard.com
+        designation: Software Engineer
+        departmentId: 10
+        departmentName: Engineering
+        joiningDate: "2026-07-30"
+        employmentType: Full-Time
+        status: Active
+
+      - employeeId: 102
+        employeeCode: EMP-1002
+        firstName: Jane
+        lastName: Smith
+        fullName: Jane Smith
+        email: jane.smith@supercard.com
+        designation: Senior Software Engineer
+        departmentId: 10
+        departmentName: Engineering
+        joiningDate: "2026-07-31"
+        employmentType: Full-Time
+        status: Active
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260730-AB12345
+      timestamp: "2026-07-30T10:15:30Z"
+
+CreateEmployee:
+  summary: Create Employee Response
+
+  value:
+
+    success: true
+    message: Employee created successfully.
+
+    data:
+
+      employeeId: 103
+      employeeCode: EMP-1003
+      firstName: Alex
+      lastName: Johnson
+      fullName: Alex Johnson
+      email: alex.johnson@supercard.com
+      designation: HR Executive
+      departmentId: 20
+      departmentName: Human Resources
+      joiningDate: "2026-07-31"
+      employmentType: Full-Time
+      status: Active
+
+    metadata:
+
+      requestId: REQ-20260730-CD67890
+      timestamp: "2026-07-30T10:20:45Z"
+
+UpdateEmployee:
+  summary: Update Employee Response
+
+  value:
+
+    success: true
+    message: Employee updated successfully.
+
+    data:
+
+      employeeId: 101
+      employeeCode: EMP-1001
+      firstName: John
+      lastName: Doe
+      fullName: John Doe
+      email: john.doe@supercard.com
+      designation: Senior Software Engineer
+      departmentId: 10
+      departmentName: Engineering
+      joiningDate: "2026-07-30"
+      employmentType: Full-Time
+      status: Active
+      salary: 90000
+
+    metadata:
+
+      requestId: REQ-20260730-EF13579
+      timestamp: "2026-07-30T11:05:12Z"
+
+DeleteEmployee:
+  summary: Delete Employee Response
+
+  value:
+
+    success: true
+    message: Employee deleted successfully.
+
+    metadata:
+
+      requestId: REQ-20260730-GH24680
+      timestamp: "2026-07-30T11:30:00Z"

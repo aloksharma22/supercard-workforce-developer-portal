@@ -1,0 +1,129 @@
+Department:
+  summary: Department Resource
+
+  value:
+
+    success: true
+    message: Department retrieved successfully.
+
+    data:
+
+      departmentId: 10
+      departmentCode: DEPT-ENG
+      departmentName: Engineering
+      description: Responsible for software design, development, and maintenance.
+      managerId: 2
+      managerName: Jane Smith
+      employeeCount: 42
+      location: Vadodara
+      budget: 2500000
+      status: Active
+      createdAt: "2026-07-30T10:15:30Z"
+      updatedAt: "2026-07-30T10:15:30Z"
+
+    metadata:
+
+      requestId: REQ-20260730-DP12345
+      timestamp: "2026-07-30T10:15:30Z"
+
+DepartmentList:
+  summary: Department Collection
+
+  value:
+
+    success: true
+    message: Departments retrieved successfully.
+
+    data:
+
+      - departmentId: 10
+        departmentCode: DEPT-ENG
+        departmentName: Engineering
+        managerId: 2
+        managerName: Jane Smith
+        employeeCount: 42
+        location: Vadodara
+        status: Active
+
+      - departmentId: 20
+        departmentCode: DEPT-HR
+        departmentName: Human Resources
+        managerId: 5
+        managerName: Robert Wilson
+        employeeCount: 18
+        location: Mumbai
+        status: Active
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260730-DP12345
+      timestamp: "2026-07-30T10:15:30Z"
+
+CreateDepartment:
+  summary: Create Department Response
+
+  value:
+
+    success: true
+    message: Department created successfully.
+
+    data:
+
+      departmentId: 30
+      departmentCode: DEPT-FIN
+      departmentName: Finance
+      managerId: 5
+      managerName: Emily Johnson
+      location: Bengaluru
+      status: Active
+
+    metadata:
+
+      requestId: REQ-20260730-DP23456
+      timestamp: "2026-07-30T10:20:45Z"
+
+UpdateDepartment:
+  summary: Update Department Response
+
+  value:
+
+    success: true
+    message: Department updated successfully.
+
+    data:
+
+      departmentId: 10
+      departmentCode: DEPT-ENG
+      departmentName: Engineering & Technology
+      managerId: 5
+      managerName: Emily Johnson
+      location: Bengaluru
+      budget: 3200000
+      status: Active
+
+    metadata:
+
+      requestId: REQ-20260730-DP34567
+      timestamp: "2026-07-30T11:05:12Z"
+
+DeleteDepartment:
+  summary: Delete Department Response
+
+  value:
+
+    success: true
+    message: Department deleted successfully.
+
+    metadata:
+
+      requestId: REQ-20260730-DP45678
+      timestamp: "2026-07-30T11:30:00Z"

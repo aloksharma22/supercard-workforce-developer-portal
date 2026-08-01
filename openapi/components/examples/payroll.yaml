@@ -1,0 +1,196 @@
+Payroll:
+  summary: Payroll Resource
+
+  value:
+
+    payrollId: 7001
+    employeeId: 101
+    employeeName: John Doe
+    payrollPeriod: "2026-07"
+    payDate: "2026-07-31"
+    basicSalary: 65000
+    allowances: 12000
+    bonus: 5000
+    overtimePay: 2500
+    deductions: 3000
+    tax: 6500
+    providentFund: 1800
+    grossSalary: 84500
+    netSalary: 73200
+    currency: INR
+    paymentStatus: Paid
+    paymentMethod: Bank Transfer
+    transactionReference: TXN-20260731-001245
+    remarks: Performance bonus included.
+    createdAt: "2026-07-31T10:15:30Z"
+    updatedAt: "2026-07-31T10:15:30Z"
+
+PayrollList:
+  summary: Payroll Collection
+
+  value:
+
+    success: true
+    message: Payroll records retrieved successfully.
+
+    data:
+
+      - payrollId: 7001
+        employeeId: 101
+        employeeName: John Doe
+        payrollPeriod: "2026-07"
+        payDate: "2026-07-31"
+        basicSalary: 65000
+        grossSalary: 84500
+        netSalary: 73200
+        paymentStatus: Paid
+
+      - payrollId: 7002
+        employeeId: 102
+        employeeName: Jane Smith
+        payrollPeriod: "2026-07"
+        payDate: "2026-07-31"
+        basicSalary: 72000
+        grossSalary: 92500
+        netSalary: 80400
+        paymentStatus: Paid
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260731-PR12345
+      timestamp: "2026-07-31T11:00:00Z"
+
+GeneratePayroll:
+  summary: Generate Payroll Response
+
+  value:
+
+    success: true
+    message: Payroll generated successfully.
+
+    data:
+
+      payrollId: 7003
+      employeeId: 101
+      employeeName: John Doe
+      payrollPeriod: "2026-08"
+      payDate: "2026-08-31"
+      basicSalary: 65000
+      allowances: 12000
+      bonus: 5000
+      overtimePay: 2500
+      deductions: 3000
+      tax: 6500
+      providentFund: 1800
+      grossSalary: 84500
+      netSalary: 73200
+      currency: INR
+      paymentStatus: Processing
+      paymentMethod: Bank Transfer
+      transactionReference: TXN-20260831-001299
+      remarks: Monthly payroll processing.
+      createdAt: "2026-08-31T09:30:00Z"
+      updatedAt: "2026-08-31T09:30:00Z"
+
+    metadata:
+
+      requestId: REQ-20260831-PR23456
+      timestamp: "2026-08-31T09:30:00Z"
+
+PayrollHistory:
+  summary: Payroll History
+
+  value:
+
+    success: true
+    message: Payroll history retrieved successfully.
+
+    data:
+
+      - payrollId: 7001
+        employeeId: 101
+        employeeName: John Doe
+        payrollPeriod: "2026-07"
+        payDate: "2026-07-31"
+        basicSalary: 65000
+        grossSalary: 84500
+        netSalary: 73200
+        paymentStatus: Paid
+
+      - payrollId: 6988
+        employeeId: 102
+        employeeName: Jane Smith
+        payrollPeriod: "2026-06"
+        payDate: "2026-06-30"
+        basicSalary: 72000
+        grossSalary: 92500
+        netSalary: 71800
+        paymentStatus: Paid
+
+      - payrollId: 6975
+        employeeId: 103
+        employeeName: Alex Johnson
+        payrollPeriod: "2026-05"
+        payDate: "2026-05-31"
+        basicSalary: 71000
+        grossSalary: 90500
+        netSalary: 70500
+        paymentStatus: Paid
+
+    metadata:
+
+      requestId: REQ-20260831-PR34567
+      timestamp: "2026-08-31T10:15:00Z"
+
+SalarySummary:
+  summary: Salary Summary
+
+  value:
+
+    success: true
+    message: Salary summary retrieved successfully.
+
+    data:
+
+      employeeId: 101
+      financialYear: "2026-2027"
+      totalGrossSalary: 1014000
+      totalNetSalary: 878400
+      totalTax: 78000
+      totalProvidentFund: 21600
+      monthsProcessed: 12
+
+    metadata:
+
+      requestId: REQ-20260831-PR45678
+      timestamp: "2026-08-31T10:45:00Z"
+
+DownloadPayslip:
+  summary: Download Payslip
+
+  value:
+
+    success: true
+    message: Payslip generated successfully.
+
+    data:
+
+      payrollId: 7001
+      payrollPeriod: "2026-07"
+      fileName: payslip-july-2026.pdf
+      downloadUrl: https://api.supercard.com/v1/payroll/7001/payslip
+      expiresAt: "2026-08-07T23:59:59Z"
+
+    metadata:
+
+      requestId: REQ-20260831-PR56789
+      timestamp: "2026-08-31T11:00:00Z"

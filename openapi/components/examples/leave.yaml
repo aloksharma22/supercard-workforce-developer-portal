@@ -1,0 +1,210 @@
+Leave:
+  summary: Leave Resource
+
+  value:
+
+    success: true
+    message: Leave request retrieved successfully.
+
+    data:
+
+      leaveId: 5001
+      employeeId: 101
+      employeeName: John Doe
+      leaveType: Annual
+      startDate: "2026-08-10"
+      endDate: "2026-08-12"
+      totalDays: 3
+      reason: Family vacation.
+      status: Approved
+      approvedBy: 2
+      approverName: Jane Smith
+      approvedAt: "2026-08-01T10:15:30Z"
+      rejectionReason: null
+      remarks: Approved as leave balance is sufficient.
+      createdAt: "2026-07-30T09:30:00Z"
+      updatedAt: "2026-08-01T10:15:30Z"
+
+    metadata:
+
+      requestId: REQ-20260801-LV12345
+      timestamp: "2026-08-01T10:30:00Z"
+
+LeaveList:
+  summary: Leave Collection
+
+  value:
+
+    success: true
+    message: Leave requests retrieved successfully.
+
+    data:
+
+      - leaveId: 5001
+        employeeId: 101
+        employeeName: John Doe
+        leaveType: Annual
+        startDate: "2026-08-10"
+        endDate: "2026-08-12"
+        totalDays: 3
+        reason: Family vacation.
+        status: Approved
+
+      - leaveId: 5002
+        employeeId: 102
+        employeeName: Jane Smith
+        leaveType: Sick
+        startDate: "2026-08-15"
+        endDate: "2026-08-16"
+        totalDays: 2
+        reason: Medical leave due to fever.
+        status: Pending
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260801-LV12345
+      timestamp: "2026-08-01T10:30:00Z"
+
+ApplyLeave:
+  summary: Apply Leave Response
+
+  value:
+
+    success: true
+    message: Leave request submitted successfully.
+
+    data:
+
+      leaveId: 5003
+      employeeId: 103
+      employeeName: Alex Johnson
+      leaveType: Casual
+      startDate: "2026-08-20"
+      endDate: "2026-08-20"
+      totalDays: 1
+      reason: Family event.
+      status: Pending
+
+    metadata:
+
+      requestId: REQ-20260801-LV23456
+      timestamp: "2026-08-01T11:05:00Z"
+
+ApproveLeave:
+  summary: Approve Leave Response
+
+  value:
+
+    success: true
+    message: Leave request approved successfully.
+
+    data:
+
+      leaveId: 5003
+      employeeId: 103
+      employeeName: Alex Johnson
+      leaveType: Casual
+      startDate: "2026-08-20"
+      endDate: "2026-08-20"
+      totalDays: 1
+      reason: Family event.
+      status: Approved
+      approvedBy: 2
+      approverName: Jane Smith
+      approvedAt: "2026-08-01T12:00:00Z"
+
+    metadata:
+
+      requestId: REQ-20260801-LV34567
+      timestamp: "2026-08-01T12:00:01Z"
+
+RejectLeave:
+  summary: Reject Leave Response
+
+  value:
+
+    success: true
+    message: Leave request rejected successfully.
+
+    data:
+
+      leaveId: 5004
+      employeeId: 101
+      employeeName: John Doe
+      leaveType: Annual
+      startDate: "2026-08-10"
+      endDate: "2026-08-12"
+      totalDays: 3
+      reason: Family vacation.
+      status: Rejected
+      rejectionReason: Critical project delivery during requested dates.
+
+    metadata:
+
+      requestId: REQ-20260801-LV45678
+      timestamp: "2026-08-01T12:15:00Z"
+
+CancelLeave:
+  summary: Cancel Leave Response
+
+  value:
+
+    success: true
+    message: Leave request cancelled successfully.
+
+    data:
+
+      leaveId: 5005
+      employeeId: 101
+      employeeName: John Doe
+      leaveType: Annual
+      startDate: "2026-08-10"
+      endDate: "2026-08-12"
+      totalDays: 3
+      reason: Family vacation.
+      status: Cancelled
+
+    metadata:
+
+      requestId: REQ-20260801-LV56789
+      timestamp: "2026-08-01T13:00:00Z"
+
+LeaveBalance:
+  summary: Leave Balance
+
+  value:
+
+    success: true
+    message: Leave balance retrieved successfully.
+
+    data:
+
+      employeeId: 101
+      annual:
+        allocated: 24
+        used: 8
+        remaining: 16
+
+      casual:
+        allocated: 12
+        used: 3
+        remaining: 9
+
+      sick:
+        allocated: 10
+        used: 2
+        remaining: 8
+
+    metadata:
+
+      requestId: REQ-20260801-LV67890
+      timestamp: "2026-08-01T14:00:00Z"

@@ -1,0 +1,104 @@
+Payroll:
+  type: object
+  description: Represents an employee payroll record.
+
+  properties:
+
+    payrollId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeName:
+      type: string
+      readOnly: true
+      description: Full name of the employee.
+      example: John Doe
+
+    payrollPeriod:
+      type: string
+      description: Payroll period in YYYY-MM format.
+      example: "2026-07"
+
+    payDate:
+      $ref: "./common.yaml#/Date"
+
+    basicSalary:
+      $ref: "./common.yaml#/Money"
+
+    allowances:
+      $ref: "./common.yaml#/Money"
+
+    bonus:
+      $ref: "./common.yaml#/Money"
+
+    overtimePay:
+      $ref: "./common.yaml#/Money"
+
+    deductions:
+      $ref: "./common.yaml#/Money"
+
+    tax:
+      $ref: "./common.yaml#/Money"
+
+    providentFund:
+      $ref: "./common.yaml#/Money"
+
+    grossSalary:
+      $ref: "./common.yaml#/Money"
+
+    netSalary:
+      $ref: "./common.yaml#/Money"
+
+    currency:
+      type: string
+      description: ISO 4217 currency code.
+      example: INR
+
+    paymentStatus:
+      type: string
+      description: Current payroll payment status.
+      enum:
+        - Pending
+        - Processing
+        - Paid
+        - Failed
+      example: Paid
+
+    paymentMethod:
+      type: string
+      description: Method used to disburse payroll.
+      enum:
+        - Bank Transfer
+        - Cheque
+        - Cash
+      example: Bank Transfer
+
+    transactionReference:
+      type: string
+      nullable: true
+      description: Payment transaction reference number.
+      example: TXN-20260730-001245
+
+    remarks:
+      type: string
+      nullable: true
+      description: Additional payroll remarks.
+      example: Performance bonus included.
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+    updatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - payrollId
+    - employeeId
+    - payrollPeriod
+    - payDate
+    - basicSalary
+    - grossSalary
+    - netSalary
+    - paymentStatus

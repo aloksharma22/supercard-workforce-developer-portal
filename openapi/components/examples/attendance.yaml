@@ -1,0 +1,167 @@
+Attendance:
+  summary: Attendance Resource
+
+  value:
+
+    success: true
+    message: Attendance record retrieved successfully.
+
+    data:
+
+      attendanceId: 1001
+      employeeId: 101
+      employeeName: John Doe
+      attendanceDate: "2026-07-30"
+      clockIn: "2026-07-30T09:00:00Z"
+      clockOut: "2026-07-30T18:15:00Z"
+      totalHours: 9.25
+      overtimeHours: 1.25
+      breakDuration: 45
+      attendanceStatus: Present
+      workMode: Office
+      remarks: Completed production deployment.
+      createdAt: "2026-07-30T09:00:10Z"
+      updatedAt: "2026-07-30T18:15:05Z"
+
+    metadata:
+
+      requestId: REQ-20260730-AT12345
+      timestamp: "2026-07-30T18:20:00Z"
+
+AttendanceList:
+  summary: Attendance Collection
+
+  value:
+
+    success: true
+    message: Attendance records retrieved successfully.
+
+    data:
+
+      - attendanceId: 1001
+        employeeId: 101
+        employeeName: John Doe
+        attendanceDate: "2026-07-30"
+        clockIn: "2026-07-30T09:00:00Z"
+        clockOut: "2026-07-30T18:15:00Z"
+        totalHours: 9.25
+        attendanceStatus: Present
+        workMode: Office
+
+      - attendanceId: 1002
+        employeeId: 102
+        employeeName: Jane Smith
+        attendanceDate: "2026-07-30"
+        clockIn: "2026-07-30T08:55:00Z"
+        clockOut: "2026-07-30T17:45:00Z"
+        totalHours: 8.83
+        attendanceStatus: Present
+        workMode: Hybrid
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260730-AT12345
+      timestamp: "2026-07-30T18:20:00Z"
+
+ClockIn:
+  summary: Clock-In Response
+
+  value:
+
+    success: true
+    message: Clock-in recorded successfully.
+
+    data:
+
+      attendanceId: 1003
+      employeeId: 103
+      employeeName: Alex Johnson
+      attendanceDate: "2026-07-31"
+      clockIn: "2026-07-31T09:01:15Z"
+      attendanceStatus: Present
+      workMode: Remote
+
+    metadata:
+
+      requestId: REQ-20260731-AT23456
+      timestamp: "2026-07-31T09:01:16Z"
+
+ClockOut:
+  summary: Clock-Out Response
+
+  value:
+
+    success: true
+    message: Clock-out recorded successfully.
+
+    data:
+
+      attendanceId: 1003
+      employeeId: 103
+      employeeName: Alex Johnson
+      attendanceDate: "2026-07-31"
+      clockIn: "2026-07-31T09:01:15Z"
+      clockOut: "2026-07-31T18:10:42Z"
+      totalHours: 9.16
+      overtimeHours: 1.00
+      breakDuration: 30
+      attendanceStatus: Present
+      workMode: Remote
+
+    metadata:
+
+      requestId: REQ-20260731-AT34567
+      timestamp: "2026-07-31T18:10:43Z"
+
+AttendanceSummary:
+  summary: Attendance Summary
+
+  value:
+
+    success: true
+    message: Attendance summary generated successfully.
+
+    data:
+
+      totalEmployees: 250
+      present: 232
+      absent: 8
+      late: 6
+      halfDay: 2
+      onLeave: 2
+      attendancePercentage: 92.8
+
+    metadata:
+
+      requestId: REQ-20260731-AT45678
+      timestamp: "2026-07-31T18:30:00Z"
+
+AttendanceReport:
+  summary: Attendance Report
+
+  value:
+
+    success: true
+    message: Attendance report generated successfully.
+
+    data:
+
+      reportId: 5001
+      reportType: Attendance
+      format: PDF
+      status: Completed
+      downloadUrl: https://api.supercard.com/v1/reports/5001/download
+
+    metadata:
+
+      requestId: REQ-20260731-AT56789
+      timestamp: "2026-07-31T18:45:00Z"

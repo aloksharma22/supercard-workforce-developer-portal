@@ -1,0 +1,91 @@
+Attendance:
+  type: object
+  description: Represents an employee attendance record.
+
+  properties:
+
+    attendanceId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeName:
+      type: string
+      readOnly: true
+      description: Full name of the employee.
+      example: John Doe
+
+    attendanceDate:
+      $ref: "./common.yaml#/Date"
+
+    clockIn:
+      type: string
+      format: date-time
+      description: Employee clock-in time (UTC).
+      example: "2026-07-30T09:00:00Z"
+
+    clockOut:
+      type: string
+      format: date-time
+      nullable: true
+      description: Employee clock-out time (UTC).
+      example: "2026-07-30T18:15:00Z"
+
+    totalHours:
+      type: number
+      format: float
+      readOnly: true
+      description: Total working hours for the day.
+      example: 9.25
+
+    overtimeHours:
+      type: number
+      format: float
+      description: Total overtime hours worked.
+      example: 1.25
+
+    breakDuration:
+      type: integer
+      description: Total break duration in minutes.
+      example: 45
+
+    attendanceStatus:
+      type: string
+      description: Attendance status for the employee.
+      enum:
+        - Present
+        - Absent
+        - Late
+        - Half-Day
+        - On Leave
+        - Holiday
+      example: Present
+
+    workMode:
+      type: string
+      description: Employee working mode.
+      enum:
+        - Office
+        - Remote
+        - Hybrid
+      example: Office
+
+    remarks:
+      type: string
+      nullable: true
+      description: Additional attendance remarks.
+      example: Worked on production deployment.
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+    updatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - attendanceId
+    - employeeId
+    - attendanceDate
+    - clockIn
+    - attendanceStatus

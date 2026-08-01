@@ -1,0 +1,161 @@
+openapi: 3.0.3
+
+info:
+  title: Supercard Workforce API
+  version: 1.0.0
+  description: |
+    The **Supercard Workforce API** is a RESTful API that enables organizations to integrate workforce management capabilities into custom applications.
+
+    The API provides secure endpoints for managing:
+
+    - Employees
+    - Departments
+    - Attendance
+    - Leave Management
+    - Payroll
+    - Reports
+
+    ## Features
+
+    - OAuth 2.0 Bearer Authentication
+    - RESTful Resource-Oriented Design
+    - JSON Request and Response Payloads
+    - Standard HTTP Status Codes
+    - Pagination
+    - Filtering
+    - Sorting
+    - Consistent Error Responses
+    - Modular OpenAPI Specification
+
+    Unless otherwise noted, all endpoints require OAuth 2.0 Bearer Authentication.
+
+  termsOfService: https://supercard.com/terms
+
+  contact:
+    name: Supercard API Team
+    email: support@supercard.com
+    url: https://supercard.com
+
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+
+  - url: https://api.supercard.com/v1
+    description: Production Environment
+
+  - url: https://sandbox.api.supercard.com/v1
+    description: Sandbox Environment
+
+tags:
+
+  - name: Employees
+    description: Create, retrieve, update, and manage employee records.
+
+  - name: Departments
+    description: Manage organizational departments.
+
+  - name: Attendance
+    description: Record and retrieve employee attendance information.
+
+  - name: Leaves
+    description: Submit, approve, reject, and manage leave requests.
+
+  - name: Payroll
+    description: Generate payroll and retrieve payroll information.
+
+  - name: Reports
+    description: Generate workforce analytics and reporting data.
+
+paths:
+
+  /employees:
+    $ref: "./paths/employees.yaml#/employees"
+
+  /employees/{employeeId}:
+    $ref: "./paths/employees.yaml#/employee"
+
+  /departments:
+    $ref: "./paths/departments.yaml#/departments"
+
+  /departments/{departmentId}:
+    $ref: "./paths/departments.yaml#/department"
+
+  /attendance:
+    $ref: "./paths/attendance.yaml#/attendance"
+
+  /attendance/clock-in:
+    $ref: "./paths/attendance.yaml#/clockIn"
+
+  /attendance/{attendanceId}/clock-out:
+    $ref: "./paths/attendance.yaml#/clockOut"
+
+  /attendance/{attendanceId}:
+    $ref: "./paths/attendance.yaml#/attendanceById"
+
+  /attendance/summary:
+    $ref: "./paths/attendance.yaml#/attendanceSummary"
+
+  /attendance/report:
+    $ref: "./paths/attendance.yaml#/attendanceReport"
+
+  /leaves:
+    $ref: "./paths/leaves.yaml#/leaves"
+
+  /leaves/{leaveId}:
+    $ref: "./paths/leaves.yaml#/leave"
+
+  /leaves/{leaveId}/approve:
+    $ref: "./paths/leaves.yaml#/approveLeave"
+
+  /leaves/{leaveId}/reject:
+    $ref: "./paths/leaves.yaml#/rejectLeave"
+
+  /leaves/{leaveId}/cancel:
+    $ref: "./paths/leaves.yaml#/cancelLeave"
+
+  /leaves/balance:
+    $ref: "./paths/leaves.yaml#/leaveBalance"
+
+  /payroll:
+    $ref: "./paths/payroll.yaml#/payroll"
+
+  /payroll/history:
+    $ref: "./paths/payroll.yaml#/payrollHistory"
+
+  /payroll/{payrollId}/payslip:
+    $ref: "./paths/payroll.yaml#/downloadPayslip"
+
+  /payroll/salary-summary:
+    $ref: "./paths/payroll.yaml#/salarySummary"
+
+  /reports:
+    $ref: "./paths/reports.yaml#/reports"
+
+  /reports/attendance:
+    $ref: "./paths/reports.yaml#/attendanceReport"
+
+  /reports/payroll:
+    $ref: "./paths/reports.yaml#/payrollReport"
+
+  /reports/departments:
+    $ref: "./paths/reports.yaml#/departmentReport"
+
+  /reports/export:
+    $ref: "./paths/reports.yaml#/exportReport"
+
+components:
+
+  securitySchemes:
+
+    BearerAuth:
+      $ref: "./components/security.yaml#/BearerAuth"
+
+security:
+
+  - BearerAuth: []
+
+externalDocs:
+  description: Supercard Workforce Developer Portal
+  url: https://your-github-username.github.io/supercard-workforce-api-docs/

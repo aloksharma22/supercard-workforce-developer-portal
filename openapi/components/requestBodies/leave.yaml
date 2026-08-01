@@ -1,0 +1,180 @@
+ApplyLeaveRequest:
+  description: Request payload for submitting a new leave request.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          employeeId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          leaveType:
+            type: string
+            description: Type of leave being requested.
+            enum:
+              - Annual
+              - Casual
+              - Sick
+              - Maternity
+              - Paternity
+              - Unpaid
+              - Compensatory
+            example: Annual
+
+          startDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          endDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          reason:
+            type: string
+            description: Reason for the leave request.
+            example: Family vacation.
+
+          remarks:
+            type: string
+            nullable: true
+            description: Additional comments.
+            example: Flight tickets already booked.
+
+        required:
+          - employeeId
+          - leaveType
+          - startDate
+          - endDate
+          - reason
+
+      examples:
+
+        ApplyLeave:
+
+          summary: Submit Leave Request
+
+          value:
+
+            employeeId: 101
+            leaveType: Annual
+            startDate: "2026-08-10"
+            endDate: "2026-08-12"
+            reason: Family vacation.
+            remarks: Flight tickets already booked.
+
+ApproveLeaveRequest:
+  description: Request payload for approving a leave request.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          approvedBy:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          remarks:
+            type: string
+            nullable: true
+            description: Approval comments.
+            example: Approved as sufficient leave balance is available.
+
+        required:
+          - approvedBy
+
+      examples:
+
+        ApproveLeave:
+
+          summary: Approve Leave Request
+
+          value:
+
+            approvedBy: 2
+            remarks: Approved as sufficient leave balance is available.
+
+RejectLeaveRequest:
+  description: Request payload for rejecting a leave request.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          rejectedBy:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          rejectionReason:
+            type: string
+            description: Reason for rejecting the leave request.
+            example: Critical project delivery during the requested period.
+
+          remarks:
+            type: string
+            nullable: true
+            description: Additional comments.
+            example: Please reschedule after project completion.
+
+        required:
+          - rejectedBy
+          - rejectionReason
+
+      examples:
+
+        RejectLeave:
+
+          summary: Reject Leave Request
+
+          value:
+
+            rejectedBy: 2
+            rejectionReason: Critical project delivery during the requested period.
+            remarks: Please reschedule after project completion.
+
+CancelLeaveRequest:
+  description: Request payload for cancelling an existing leave request.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          cancellationReason:
+            type: string
+            description: Reason for cancelling the leave request.
+            example: Travel plans postponed.
+
+          remarks:
+            type: string
+            nullable: true
+            description: Additional comments.
+            example: Leave no longer required.
+
+        required:
+          - cancellationReason
+
+      examples:
+
+        CancelLeave:
+
+          summary: Cancel Leave Request
+
+          value:
+
+            cancellationReason: Travel plans postponed.
+            remarks: Leave no longer required.

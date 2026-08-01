@@ -1,0 +1,1300 @@
+openapi: 3.0.3
+info:
+  title: Supercard Workforce API
+  version: 1.0.0
+  license:
+    name: MIT
+  description: |
+    The Supercard Workforce API provides RESTful endpoints for managing:
+
+    - Employees
+    - Departments
+    - Attendance
+    - Leave Management
+    - Payroll
+    - Reports
+
+    All endpoints use OAuth 2.0 Bearer Authentication and return
+    standardized JSON responses.
+  contact:
+    name: Supercard API Team
+    email: support@supercard.com
+servers:
+  - url: https://api.supercard.com/v1
+    description: Production
+  - url: https://sandbox.api.supercard.com/v1
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Employees
+    description: Employee Management
+  - name: Departments
+    description: Department Management
+  - name: Attendance
+    description: Attendance Management
+  - name: Leaves
+    description: Leave Management
+  - name: Payroll
+    description: Payroll Management
+  - name: Reports
+    description: Reports and Analytics
+paths:
+  /employees:
+    get:
+      tags:
+        - Employees
+      summary: List employees
+      description: Retrieves a paginated list of employees. Supports pagination, sorting, and filtering.
+      operationId: listEmployees
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/Order'
+        - $ref: '#/components/parameters/DepartmentFilter'
+        - $ref: '#/components/parameters/Status'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Employees
+      summary: Create employee
+      description: Creates a new employee.
+      operationId: createEmployee
+      requestBody:
+        $ref: '#/components/requestBodies/CreateEmployeeRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /employees/{employeeId}:
+    get:
+      tags:
+        - Employees
+      summary: Retrieve employee
+      description: Retrieves a single employee using its unique identifier.
+      operationId: retrieveEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - Employees
+      summary: Update employee
+      description: Updates an existing employee.
+      operationId: updateEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateEmployeeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      tags:
+        - Employees
+      summary: Delete employee
+      description: Deletes an employee.
+      operationId: deleteEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /departments:
+    get:
+      tags:
+        - Departments
+      summary: List departments
+      description: Retrieves a paginated list of departments. Supports pagination and sorting.
+      operationId: listDepartments
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Departments
+      summary: Create department
+      description: Creates a new department within the organization.
+      operationId: createDepartment
+      security:
+        - BearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/CreateDepartmentRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /departments/{departmentId}:
+    get:
+      tags:
+        - Departments
+      summary: Retrieve department
+      description: Retrieves a department using its unique identifier.
+      operationId: retrieveDepartment
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DepartmentId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - Departments
+      summary: Update department
+      description: Updates an existing department.
+      operationId: updateDepartment
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DepartmentId'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateDepartmentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      tags:
+        - Departments
+      summary: Delete department
+      description: Deletes an existing department. A department cannot be deleted if it is assigned to active employees.
+      operationId: deleteDepartment
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DepartmentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /attendance:
+    get:
+      tags:
+        - Attendance
+      summary: List attendance records
+      description: Retrieves attendance records with support for pagination, filtering, and sorting.
+      operationId: listAttendance
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/EmployeeFilter'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /attendance/clock-in:
+    post:
+      tags:
+        - Attendance
+      summary: Clock in
+      description: Records an employee's clock-in time.
+      operationId: clockIn
+      security:
+        - BearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/ClockInRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /attendance/{attendanceId}/clock-out:
+    post:
+      tags:
+        - Attendance
+      summary: Clock out
+      description: Records an employee's clock-out time.
+      operationId: clockOut
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AttendanceId'
+      requestBody:
+        $ref: '#/components/requestBodies/ClockOutRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /attendance/{attendanceId}:
+    get:
+      tags:
+        - Attendance
+      summary: Retrieve attendance record
+      description: Retrieves a single attendance record by its unique identifier.
+      operationId: retrieveAttendance
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AttendanceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /attendance/summary:
+    get:
+      tags:
+        - Attendance
+      summary: Attendance summary
+      description: Returns summarized attendance statistics for employees within the specified date range.
+      operationId: attendanceSummary
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/EmployeeFilter'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /attendance/report:
+    get:
+      tags:
+        - Attendance
+      summary: Attendance report
+      description: Generates an attendance report for the specified reporting period.
+      operationId: attendanceReport
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /leaves:
+    get:
+      tags:
+        - Leaves
+      summary: List leave requests
+      description: Retrieves leave requests with optional filtering and pagination.
+      operationId: listLeaveRequests
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/EmployeeFilter'
+        - $ref: '#/components/parameters/Status'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Leaves
+      summary: Apply leave
+      description: Creates a new leave request.
+      operationId: applyLeave
+      security:
+        - BearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/ApplyLeaveRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /leaves/{leaveId}:
+    get:
+      tags:
+        - Leaves
+      summary: Retrieve leave request
+      operationId: retrieveLeave
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LeaveId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /leaves/{leaveId}/approve:
+    post:
+      tags:
+        - Leaves
+      summary: Approve leave
+      operationId: approveLeave
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LeaveId'
+      requestBody:
+        $ref: '#/components/requestBodies/ApproveLeaveRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /leaves/{leaveId}/reject:
+    post:
+      tags:
+        - Leaves
+      summary: Reject leave
+      operationId: rejectLeave
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LeaveId'
+      requestBody:
+        $ref: '#/components/requestBodies/RejectLeaveRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /leaves/{leaveId}/cancel:
+    post:
+      tags:
+        - Leaves
+      summary: Cancel leave
+      operationId: cancelLeave
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LeaveId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /leaves/balance:
+    get:
+      tags:
+        - Leaves
+      summary: Leave balance
+      operationId: leaveBalance
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/EmployeeFilter'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /payroll:
+    post:
+      tags:
+        - Payroll
+      summary: Generate payroll
+      description: Generates payroll for a payroll period.
+      operationId: generatePayroll
+      security:
+        - BearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/GeneratePayrollRequest'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /payroll/history:
+    get:
+      tags:
+        - Payroll
+      summary: Payroll history
+      operationId: payrollHistory
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/EmployeeFilter'
+        - $ref: '#/components/parameters/PayrollPeriod'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /payroll/{payrollId}/payslip:
+    get:
+      tags:
+        - Payroll
+      summary: Download payslip
+      operationId: downloadPayslip
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PayrollId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payroll/salary-summary:
+    get:
+      tags:
+        - Payroll
+      summary: Salary summary
+      operationId: salarySummary
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/EmployeeFilter'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /reports:
+    get:
+      tags:
+        - Reports
+      summary: List reports
+      description: Retrieves available reports.
+      operationId: listReports
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+  /reports/attendance:
+    get:
+      tags:
+        - Reports
+      summary: Attendance report
+      operationId: generateAttendanceReport
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /reports/payroll:
+    get:
+      tags:
+        - Reports
+      summary: Payroll report
+      operationId: payrollReport
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PayrollPeriod'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /reports/departments:
+    get:
+      tags:
+        - Reports
+      summary: Department report
+      operationId: departmentReport
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DepartmentFilter'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+  /reports/export:
+    post:
+      tags:
+        - Reports
+      summary: Export report
+      operationId: exportReport
+      security:
+        - BearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/ExportReportRequest'
+      responses:
+        '202':
+          $ref: '#/components/responses/Accepted'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        OAuth 2.0 Bearer Token authentication.
+
+        Every protected endpoint requires a valid access token.
+
+        ## Header Format
+
+        ```
+        Authorization: Bearer ACCESS_TOKEN
+        ```
+
+        ## Authentication Flow
+
+        1. Authenticate using your identity provider.
+        2. Obtain an OAuth 2.0 access token.
+        3. Include the token in the `Authorization` header.
+        4. Send requests to protected API endpoints.
+
+        ## Example
+
+        ```
+        GET /v1/employees HTTP/1.1
+        Host: api.supercard.com
+        Authorization: Bearer ACCESS_TOKEN
+        Accept: application/json
+        ```
+
+        ## Missing Token
+
+        If the `Authorization` header is missing, the API returns:
+
+        ```
+        HTTP/1.1 401 Unauthorized
+        ```
+
+        Example response:
+
+        ```json
+        {
+          "success": false,
+          "error": {
+            "code": "MISSING_ACCESS_TOKEN",
+            "message": "The Authorization header is required."
+          },
+          "meta": {
+            "requestId": "REQ-10001",
+            "timestamp": "2025-02-06T15:00:00Z",
+            "apiVersion": "v1"
+          }
+        }
+        ```
+
+        ## Invalid Token
+
+        If the access token is invalid or expired:
+
+        ```
+        HTTP/1.1 401 Unauthorized
+        ```
+
+        Example response:
+
+        ```json
+        {
+          "success": false,
+          "error": {
+            "code": "AUTHENTICATION_FAILED",
+            "message": "Authentication credentials are invalid or have expired."
+          },
+          "meta": {
+            "requestId": "REQ-10002",
+            "timestamp": "2025-02-06T15:05:00Z",
+            "apiVersion": "v1"
+          }
+        }
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: Number of records per page.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+        example: 20
+    SortBy:
+      name: sortBy
+      in: query
+      description: Field used for sorting.
+      required: false
+      schema:
+        type: string
+        example: employeeName
+    Order:
+      name: order
+      in: query
+      description: Sort direction.
+      required: false
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+        default: asc
+    DepartmentFilter:
+      name: departmentId
+      in: query
+      description: Filter results by department.
+      required: false
+      schema:
+        type: string
+        example: DEP-001
+    Status:
+      name: status
+      in: query
+      description: Filter results by status.
+      required: false
+      schema:
+        type: string
+        example: Active
+    EmployeeId:
+      name: employeeId
+      in: path
+      required: true
+      description: Unique employee identifier.
+      schema:
+        type: string
+        example: EMP-1001
+    DepartmentId:
+      name: departmentId
+      in: path
+      required: true
+      description: Unique department identifier.
+      schema:
+        type: string
+        example: DEP-001
+    EmployeeFilter:
+      name: employeeId
+      in: query
+      description: Filter results by employee.
+      required: false
+      schema:
+        type: string
+        example: EMP-1001
+    FromDate:
+      name: fromDate
+      in: query
+      description: Start date of the range.
+      required: false
+      schema:
+        type: string
+        format: date
+        example: '2025-02-01'
+    ToDate:
+      name: toDate
+      in: query
+      description: End date of the range.
+      required: false
+      schema:
+        type: string
+        format: date
+        example: '2025-02-28'
+    AttendanceId:
+      name: attendanceId
+      in: path
+      required: true
+      description: Unique attendance record identifier.
+      schema:
+        type: string
+        example: ATT-1001
+    Format:
+      name: format
+      in: query
+      description: Export format.
+      required: false
+      schema:
+        type: string
+        enum:
+          - pdf
+          - csv
+          - xlsx
+    LeaveId:
+      name: leaveId
+      in: path
+      required: true
+      description: Unique leave request identifier.
+      schema:
+        type: string
+        example: LEAVE-101
+    PayrollPeriod:
+      name: payrollPeriod
+      in: query
+      description: Payroll month.
+      required: false
+      schema:
+        type: string
+        pattern: ^\d{4}-\d{2}$
+        example: 2025-02
+    PayrollId:
+      name: payrollId
+      in: path
+      required: true
+      description: Unique payroll identifier.
+      schema:
+        type: string
+        example: PAY-1001
+  schemas:
+    Meta:
+      type: object
+      description: Metadata returned with every API response.
+      required:
+        - requestId
+        - timestamp
+        - apiVersion
+      properties:
+        requestId:
+          type: string
+          example: REQ-81AB923
+        correlationId:
+          type: string
+          nullable: true
+          example: CORR-7C41A9F3
+        timestamp:
+          type: string
+          format: date-time
+          example: '2025-02-06T15:30:45Z'
+        apiVersion:
+          type: string
+          example: v1
+    ApiResponse:
+      type: object
+      description: Standard successful API response.
+      required:
+        - success
+        - data
+        - meta
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          description: Response payload.
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ValidationError:
+      type: object
+      description: Validation failure for a specific request field.
+      required:
+        - field
+        - message
+      properties:
+        field:
+          type: string
+          example: email
+        message:
+          type: string
+          example: Email address is required.
+    Error:
+      type: object
+      description: Standard API error object.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: RESOURCE_NOT_FOUND
+        message:
+          type: string
+          example: The requested employee could not be found.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ErrorResponse:
+      type: object
+      required:
+        - success
+        - error
+        - meta
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          $ref: '#/components/schemas/Error'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    Employee:
+      type: object
+      description: Employee resource.
+      required:
+        - employeeId
+        - firstName
+        - lastName
+        - email
+        - departmentId
+        - designation
+        - employmentStatus
+        - joiningDate
+      properties:
+        employeeId:
+          type: string
+          example: EMP-1001
+        firstName:
+          type: string
+          example: Alok
+        lastName:
+          type: string
+          example: Sharma
+        email:
+          type: string
+          format: email
+          example: alok.sharma@example.com
+        phone:
+          type: string
+          example: +91-9876543210
+        departmentId:
+          type: string
+          example: DEP-001
+        designation:
+          type: string
+          example: Software Engineer
+        employmentStatus:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - On Leave
+        joiningDate:
+          type: string
+          format: date
+          example: '2025-01-15'
+    Department:
+      type: object
+      description: Represents an organizational department.
+      required:
+        - departmentId
+        - departmentName
+      properties:
+        departmentId:
+          type: string
+          example: DEP-001
+        departmentName:
+          type: string
+          example: Engineering
+        manager:
+          type: string
+          example: Rahul Mehta
+        employeeCount:
+          type: integer
+          minimum: 0
+          example: 42
+        createdAt:
+          type: string
+          format: date-time
+          example: '2025-02-01T09:00:00Z'
+    LeaveRequest:
+      type: object
+      description: Employee leave request.
+      required:
+        - leaveId
+        - employeeId
+        - leaveType
+        - startDate
+        - endDate
+        - status
+      properties:
+        leaveId:
+          type: string
+          example: LEAVE-101
+        employeeId:
+          type: string
+          example: EMP-1001
+        leaveType:
+          type: string
+          enum:
+            - Casual
+            - Sick
+            - Earned
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        reason:
+          type: string
+          example: Medical appointment
+        status:
+          type: string
+          enum:
+            - Pending
+            - Approved
+            - Rejected
+            - Cancelled
+        approvedBy:
+          type: string
+          nullable: true
+          example: EMP-0007
+  responses:
+    Ok:
+      description: Request completed successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiResponse'
+    BadRequest:
+      description: The request could not be processed because it contains invalid data.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            invalidRequest:
+              summary: Invalid request
+              value:
+                success: false
+                error:
+                  code: INVALID_REQUEST
+                  message: The request contains invalid parameters.
+                meta:
+                  requestId: REQ-10001
+                  timestamp: '2025-02-06T15:00:00Z'
+                  apiVersion: v1
+    Unauthorized:
+      description: Authentication failed or access token is missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Missing or invalid access token
+              value:
+                success: false
+                error:
+                  code: AUTHENTICATION_FAILED
+                  message: Authentication credentials are invalid or have expired.
+                meta:
+                  requestId: REQ-10002
+                  timestamp: '2025-02-06T15:05:00Z'
+                  apiVersion: v1
+    InternalServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            serverError:
+              summary: Internal server error
+              value:
+                success: false
+                error:
+                  code: INTERNAL_SERVER_ERROR
+                  message: An unexpected error occurred. Please try again later.
+                meta:
+                  requestId: REQ-10008
+                  timestamp: '2025-02-06T15:35:00Z'
+                  apiVersion: v1
+    Created:
+      description: Resource created successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiResponse'
+    Conflict:
+      description: The request conflicts with the current state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            duplicateResource:
+              summary: Duplicate resource
+              value:
+                success: false
+                error:
+                  code: DUPLICATE_RESOURCE
+                  message: A resource with the same identifier already exists.
+                meta:
+                  requestId: REQ-10005
+                  timestamp: '2025-02-06T15:20:00Z'
+                  apiVersion: v1
+    ValidationError:
+      description: The request failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            validationError:
+              summary: Validation failed
+              value:
+                success: false
+                error:
+                  code: VALIDATION_FAILED
+                  message: One or more validation errors occurred.
+                  details:
+                    - field: email
+                      message: A valid email address is required.
+                    - field: joiningDate
+                      message: Joining date cannot be in the future.
+                meta:
+                  requestId: REQ-10006
+                  timestamp: '2025-02-06T15:25:00Z'
+                  apiVersion: v1
+    NotFound:
+      description: The requested resource could not be found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            resourceNotFound:
+              summary: Resource not found
+              value:
+                success: false
+                error:
+                  code: RESOURCE_NOT_FOUND
+                  message: The requested resource could not be found.
+                meta:
+                  requestId: REQ-10004
+                  timestamp: '2025-02-06T15:15:00Z'
+                  apiVersion: v1
+    NoContent:
+      description: Request completed successfully. No response body is returned.
+    Accepted:
+      description: Request accepted for asynchronous processing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiResponse'
+  requestBodies:
+    CreateEmployeeRequest:
+      required: true
+      description: Employee creation payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Employee'
+          example:
+            firstName: Alok
+            lastName: Sharma
+            email: alok.sharma@example.com
+            phone: +91-9876543210
+            departmentId: DEP-001
+            designation: Software Engineer
+            employmentStatus: Active
+            joiningDate: '2025-01-15'
+    UpdateEmployeeRequest:
+      required: true
+      description: Employee update payload.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Employee'
+          example:
+            designation: Senior Software Engineer
+            departmentId: DEP-002
+            employmentStatus: Active
+    CreateDepartmentRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Department'
+          example:
+            departmentName: Engineering
+            manager: Rahul Mehta
+    UpdateDepartmentRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Department'
+          example:
+            departmentName: Engineering
+            manager: Priya Shah
+    ClockInRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - employeeId
+            properties:
+              employeeId:
+                type: string
+          example:
+            employeeId: EMP-1001
+    ClockOutRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - attendanceId
+            properties:
+              attendanceId:
+                type: string
+          example:
+            attendanceId: ATT-1001
+    ApplyLeaveRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LeaveRequest'
+          example:
+            employeeId: EMP-1001
+            leaveType: Casual
+            startDate: '2025-03-10'
+            endDate: '2025-03-12'
+            reason: Family Function
+    ApproveLeaveRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - approverId
+            properties:
+              approverId:
+                type: string
+          example:
+            approverId: EMP-0007
+    RejectLeaveRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              reason:
+                type: string
+          example:
+            reason: Leave balance exhausted.
+    GeneratePayrollRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - payrollPeriod
+            properties:
+              payrollPeriod:
+                type: string
+          example:
+            payrollPeriod: 2025-02
+    ExportReportRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - reportType
+              - format
+            properties:
+              reportType:
+                type: string
+              format:
+                type: string
+          example:
+            reportType: Payroll
+            format: pdf

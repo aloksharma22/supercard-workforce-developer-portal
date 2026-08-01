@@ -1,0 +1,643 @@
+reports:
+
+  get:
+    tags:
+      - Reports
+
+    summary: List Reports
+
+    description: |
+      Retrieves a paginated list of generated reports.
+
+      Supports pagination, filtering, searching, sorting,
+      report type filtering, and date range filtering.
+
+      This endpoint is commonly used by HR administrators,
+      finance teams, managers, and reporting dashboards.
+
+    operationId: listReports
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/Page"
+
+      - $ref: "../components/parameters.yaml#/Limit"
+
+      - $ref: "../components/parameters.yaml#/Search"
+
+      - $ref: "../components/parameters.yaml#/Sort"
+
+      - $ref: "../components/parameters.yaml#/Order"
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - name: reportType
+        in: query
+        required: false
+
+        description: Filter reports by report type.
+
+        schema:
+          type: string
+          enum:
+            - Attendance
+            - Payroll
+            - Employee
+            - Department
+            - Leave
+
+    responses:
+
+      "200":
+
+        description: Reports retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/PaginatedResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: array
+
+                      items:
+                        $ref: "../components/schemas/report.yaml#/Report"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/report.yaml#/ReportList"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+attendanceReport:
+
+  get:
+    tags:
+      - Reports
+
+    summary: Generate Attendance Report
+
+    description: |
+      Generates an attendance report for the specified reporting period.
+
+      The report includes attendance statistics, employee
+      attendance records, absences, late arrivals,
+      overtime, and working hours.
+
+      Reports can be generated for the entire organization
+      or filtered by department.
+
+    operationId: generateReportsAttendanceReport
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - $ref: "../components/parameters.yaml#/Department"
+
+      - name: format
+        in: query
+        required: false
+
+        description: Desired report format.
+
+        schema:
+          type: string
+          enum:
+            - PDF
+            - Excel
+            - CSV
+            - JSON
+          default: PDF
+
+    responses:
+
+      "200":
+
+        description: Attendance report generated successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/report.yaml#/Report"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/report.yaml#/AttendanceReport"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+payrollReport:
+
+  get:
+    tags:
+      - Reports
+
+    summary: Generate Payroll Report
+
+    description: |
+      Generates a payroll report for the specified payroll period.
+
+      The report includes salary details, earnings,
+      deductions, taxes, provident fund contributions,
+      and payment summaries.
+
+      This endpoint is intended for HR administrators,
+      finance teams, payroll officers, and auditors.
+
+    operationId: generatePayrollReport
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - name: payrollPeriod
+        in: query
+        required: true
+
+        description: Payroll period in YYYY-MM format.
+
+        schema:
+          type: string
+          example: "2026-07"
+
+      - name: format
+        in: query
+        required: false
+
+        description: Desired report format.
+
+        schema:
+          type: string
+          enum:
+            - PDF
+            - Excel
+            - CSV
+            - JSON
+          default: PDF
+
+    responses:
+
+      "200":
+
+        description: Payroll report generated successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/report.yaml#/Report"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/report.yaml#/PayrollReport"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+departmentReport:
+
+  get:
+    tags:
+      - Reports
+
+    summary: Generate Department Report
+
+    description: |
+      Generates a comprehensive department report.
+
+      The report includes department information,
+      employee count, department managers,
+      allocated budgets, operational status,
+      and organizational statistics.
+
+      This endpoint is commonly used by HR administrators,
+      department heads, finance teams,
+      and executive management.
+
+    operationId: generateDepartmentReport
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/Department"
+
+      - name: format
+        in: query
+        required: false
+
+        description: Desired report format.
+
+        schema:
+          type: string
+          enum:
+            - PDF
+            - Excel
+            - CSV
+            - JSON
+          default: PDF
+
+    responses:
+
+      "200":
+
+        description: Department report generated successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/report.yaml#/Report"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/report.yaml#/DepartmentReport"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url "https://api.supercard.com/v1/reports/departments?departmentId=10&format=PDF" \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/reports/departments?departmentId=10&format=PDF",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/reports/departments",
+              params={
+                  "departmentId": 10,
+                  "format": "PDF"
+              },
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/reports/departments",
+            {
+              params: {
+                departmentId: 10,
+                format: "PDF"
+              },
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+exportReport:
+
+  get:
+    tags:
+      - Reports
+
+    summary: Export Report
+
+    description: |
+      Exports a previously generated report in the requested format.
+
+      This endpoint returns a secure download URL that can be used
+      to download the exported report. Reports are available in
+      multiple formats including PDF, Excel, CSV, and JSON.
+
+      Download URLs are temporary and expire automatically
+      after a configurable period for security purposes.
+
+    operationId: exportReport
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - name: reportId
+        in: query
+        required: true
+
+        description: Unique identifier of the generated report.
+
+        schema:
+          type: integer
+          example: 9001
+
+      - name: format
+        in: query
+        required: true
+
+        description: Export format.
+
+        schema:
+          type: string
+          enum:
+            - PDF
+            - Excel
+            - CSV
+            - JSON
+          example: PDF
+
+    responses:
+
+      "200":
+
+        description: Report exported successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        reportId:
+                          $ref: "../components/schemas/common.yaml#/Identifier"
+
+                        fileName:
+                          type: string
+                          example: monthly-attendance-report-july-2026.pdf
+
+                        format:
+                          type: string
+                          example: PDF
+
+                        downloadUrl:
+                          type: string
+                          format: uri
+                          example: https://api.supercard.com/v1/reports/9001/download
+
+                        expiresAt:
+                          $ref: "../components/schemas/common.yaml#/DateTime"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/report.yaml#/ExportReport"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url "https://api.supercard.com/v1/reports/export?reportId=9001&format=PDF" \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/reports/export?reportId=9001&format=PDF",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/reports/export",
+              params={
+                  "reportId": 9001,
+                  "format": "PDF"
+              },
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/reports/export",
+            {
+              params: {
+                reportId: 9001,
+                format: "PDF"
+              },
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+x-tagGroups:
+  - name: Reporting
+    tags:
+      - Reports
+
+externalDocs:
+  description: Reports API Documentation
+  url: https://your-github-username.github.io/supercard-workforce-api-docs/api-reference/reports/overview/ 

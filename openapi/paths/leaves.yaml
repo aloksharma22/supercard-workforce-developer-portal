@@ -1,0 +1,921 @@
+leaves:
+
+  get:
+    tags:
+      - Leaves
+
+    summary: List Leave Requests
+
+    description: |
+      Retrieves a paginated list of employee leave requests.
+
+      Supports pagination, filtering, searching, sorting,
+      and date range filtering.
+
+      This endpoint is commonly used by HR administrators,
+      managers, and employee self-service applications.
+
+    operationId: listLeaveRequests
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/Page"
+
+      - $ref: "../components/parameters.yaml#/Limit"
+
+      - $ref: "../components/parameters.yaml#/Search"
+
+      - $ref: "../components/parameters.yaml#/Status"
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - $ref: "../components/parameters.yaml#/Sort"
+
+      - $ref: "../components/parameters.yaml#/Order"
+
+    responses:
+
+      "200":
+
+        description: Leave requests retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/PaginatedResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: array
+
+                      items:
+                        $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/LeaveList"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+  post:
+    tags:
+      - Leaves
+
+    summary: Apply for Leave
+
+    description: |
+      Creates a new leave request.
+
+      Employees can submit leave requests for approval.
+      The request is initially created with a **Pending**
+      status and must be approved or rejected by an authorized manager.
+
+    operationId: applyLeave
+
+    security:
+      - BearerAuth: []
+
+    requestBody:
+      $ref: "../components/requestBodies/leave.yaml#/ApplyLeaveRequest"
+
+    responses:
+
+      "201":
+
+        description: Leave request submitted successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/ApplyLeave"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+leave:
+
+  get:
+    tags:
+      - Leaves
+
+    summary: Retrieve Leave Request
+
+    description: |
+      Retrieves detailed information for a specific leave request.
+
+      The response includes leave details, employee information,
+      approval status, approver details, leave duration,
+      remarks, and audit timestamps.
+
+      This endpoint is commonly used by HR administrators,
+      managers, payroll systems, and employee self-service portals.
+
+    operationId: getLeaveById
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/LeaveId"
+
+    responses:
+
+      "200":
+
+        description: Leave request retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/Leave"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url https://api.supercard.com/v1/leaves/5001 \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/leaves/5001",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/leaves/5001",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/leaves/5001",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+approveLeave:
+
+  post:
+    tags:
+      - Leaves
+
+    summary: Approve Leave Request
+
+    description: |
+      Approves a pending leave request.
+
+      Once approved, the leave status changes to **Approved** and
+      the employee's leave balance is updated according to
+      organizational leave policies.
+
+      Only authorized managers or HR administrators can approve
+      leave requests.
+
+    operationId: approveLeave
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/LeaveId"
+
+    requestBody:
+      $ref: "../components/requestBodies/leave.yaml#/ApproveLeaveRequest"
+
+    responses:
+
+      "200":
+
+        description: Leave request approved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/ApproveLeave"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request POST \
+            --url https://api.supercard.com/v1/leaves/5001/approve \
+            --header "Authorization: Bearer ACCESS_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{
+              "approvedBy":2,
+              "remarks":"Approved as sufficient leave balance is available."
+            }'
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/leaves/5001/approve",
+            {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer ACCESS_TOKEN",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                approvedBy: 2,
+                remarks: "Approved as sufficient leave balance is available."
+              })
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.post(
+              "https://api.supercard.com/v1/leaves/5001/approve",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN",
+                  "Content-Type": "application/json"
+              },
+              json={
+                  "approvedBy": 2,
+                  "remarks": "Approved as sufficient leave balance is available."
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.post(
+            "https://api.supercard.com/v1/leaves/5001/approve",
+            {
+              approvedBy: 2,
+              remarks: "Approved as sufficient leave balance is available."
+            },
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+rejectLeave:
+
+  post:
+    tags:
+      - Leaves
+
+    summary: Reject Leave Request
+
+    description: |
+      Rejects a pending leave request.
+
+      Once rejected, the leave status changes to **Rejected** and
+      the employee is notified with the rejection reason.
+
+      Only authorized managers or HR administrators can reject
+      leave requests.
+
+    operationId: rejectLeave
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/LeaveId"
+
+    requestBody:
+      $ref: "../components/requestBodies/leave.yaml#/RejectLeaveRequest"
+
+    responses:
+
+      "200":
+
+        description: Leave request rejected successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/RejectLeave"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request POST \
+            --url https://api.supercard.com/v1/leaves/5001/reject \
+            --header "Authorization: Bearer ACCESS_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{
+              "rejectedBy":2,
+              "rejectionReason":"Critical project delivery during the requested period.",
+              "remarks":"Please submit a new request after project completion."
+            }'
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/leaves/5001/reject",
+            {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer ACCESS_TOKEN",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                rejectedBy: 2,
+                rejectionReason: "Critical project delivery during the requested period.",
+                remarks: "Please submit a new request after project completion."
+              })
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.post(
+              "https://api.supercard.com/v1/leaves/5001/reject",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN",
+                  "Content-Type": "application/json"
+              },
+              json={
+                  "rejectedBy": 2,
+                  "rejectionReason": "Critical project delivery during the requested period.",
+                  "remarks": "Please submit a new request after project completion."
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.post(
+            "https://api.supercard.com/v1/leaves/5001/reject",
+            {
+              rejectedBy: 2,
+              rejectionReason: "Critical project delivery during the requested period.",
+              remarks: "Please submit a new request after project completion."
+            },
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+cancelLeave:
+
+  post:
+    tags:
+      - Leaves
+
+    summary: Cancel Leave Request
+
+    description: |
+      Cancels a previously submitted leave request.
+
+      Employees can cancel pending leave requests before they are
+      approved. Depending on organizational policies, approved leave
+      requests may also be cancelled if cancellation is permitted.
+
+      Once cancelled, the leave status changes to **Cancelled**
+      and the employee's leave balance is updated if applicable.
+
+    operationId: cancelLeave
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/LeaveId"
+
+    requestBody:
+      $ref: "../components/requestBodies/leave.yaml#/CancelLeaveRequest"
+
+    responses:
+
+      "200":
+
+        description: Leave request cancelled successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/leave.yaml#/Leave"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/CancelLeave"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request POST \
+            --url https://api.supercard.com/v1/leaves/5001/cancel \
+            --header "Authorization: Bearer ACCESS_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{
+              "cancellationReason":"Travel plans postponed.",
+              "remarks":"Leave is no longer required."
+            }'
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/leaves/5001/cancel",
+            {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer ACCESS_TOKEN",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                cancellationReason: "Travel plans postponed.",
+                remarks: "Leave is no longer required."
+              })
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.post(
+              "https://api.supercard.com/v1/leaves/5001/cancel",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN",
+                  "Content-Type": "application/json"
+              },
+              json={
+                  "cancellationReason": "Travel plans postponed.",
+                  "remarks": "Leave is no longer required."
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.post(
+            "https://api.supercard.com/v1/leaves/5001/cancel",
+            {
+              cancellationReason: "Travel plans postponed.",
+              remarks: "Leave is no longer required."
+            },
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+leaveBalance:
+
+  get:
+    tags:
+      - Leaves
+
+    summary: Retrieve Leave Balance
+
+    description: |
+      Retrieves the current leave balance for an employee.
+
+      The response includes the allocated, used, and remaining
+      leave balance for each supported leave type.
+
+      This endpoint is commonly used by employee self-service
+      portals, HR dashboards, and leave management systems.
+
+    operationId: getLeaveBalance
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - name: employeeId
+        in: query
+        required: true
+
+        description: Unique identifier of the employee.
+
+        schema:
+          type: integer
+          example: 101
+
+    responses:
+
+      "200":
+
+        description: Leave balance retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+              $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/leave.yaml#/LeaveBalance"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url "https://api.supercard.com/v1/leaves/balance?employeeId=101" \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/leaves/balance?employeeId=101",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/leaves/balance",
+              params={
+                  "employeeId": 101
+              },
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/leaves/balance",
+            {
+              params: {
+                employeeId: 101
+              },
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+

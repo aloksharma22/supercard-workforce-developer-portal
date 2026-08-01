@@ -1,0 +1,106 @@
+CreateDepartmentRequest:
+  description: Request payload for creating a new department.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          departmentCode:
+            type: string
+            description: Unique department code.
+            example: DEPT-ENG
+
+          departmentName:
+            type: string
+            description: Department name.
+            example: Engineering
+
+          description:
+            type: string
+            description: Brief description of the department.
+            example: Responsible for software design and development.
+
+          managerId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          location:
+            type: string
+            description: Primary office location.
+            example: Vadodara
+
+          budget:
+            $ref: "../schemas/common.yaml#/Money"
+
+          status:
+            $ref: "../schemas/common.yaml#/Status"
+
+        required:
+          - departmentCode
+          - departmentName
+          - managerId
+
+      examples:
+
+        CreateDepartment:
+
+          summary: Create Engineering Department
+
+          value:
+
+            departmentCode: DEPT-ENG
+            departmentName: Engineering
+            description: Responsible for software design and development.
+            managerId: 2
+            location: Vadodara
+            budget: 2500000
+            status: Active
+
+UpdateDepartmentRequest:
+  description: Request payload for updating an existing department.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          departmentName:
+            type: string
+
+          description:
+            type: string
+
+          managerId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          location:
+            type: string
+
+          budget:
+            $ref: "../schemas/common.yaml#/Money"
+
+          status:
+            $ref: "../schemas/common.yaml#/Status"
+
+      examples:
+
+        UpdateDepartment:
+
+          summary: Update Engineering Department
+
+          value:
+
+            departmentName: Engineering & Technology
+            description: Responsible for software engineering, architecture, and platform services.
+            managerId: 5
+            location: Bengaluru
+            budget: 3200000
+            status: Active

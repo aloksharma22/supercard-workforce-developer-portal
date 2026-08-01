@@ -1,0 +1,97 @@
+Leave:
+  type: object
+  description: Represents an employee leave request.
+
+  properties:
+
+    leaveId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeId:
+      $ref: "./common.yaml#/Identifier"
+
+    employeeName:
+      type: string
+      readOnly: true
+      description: Full name of the employee.
+      example: John Doe
+
+    leaveType:
+      type: string
+      description: Type of leave requested.
+      enum:
+        - Annual
+        - Casual
+        - Sick
+        - Maternity
+        - Paternity
+        - Unpaid
+        - Compensatory
+      example: Annual
+
+    startDate:
+      $ref: "./common.yaml#/Date"
+
+    endDate:
+      $ref: "./common.yaml#/Date"
+
+    totalDays:
+      type: number
+      format: float
+      readOnly: true
+      description: Total number of leave days.
+      example: 3
+
+    reason:
+      type: string
+      description: Reason for the leave request.
+      example: Family vacation.
+
+    status:
+      type: string
+      description: Current status of the leave request.
+      enum:
+        - Pending
+        - Approved
+        - Rejected
+        - Cancelled
+      example: Pending
+
+    approvedBy:
+      $ref: "./common.yaml#/Identifier"
+
+    approverName:
+      type: string
+      readOnly: true
+      description: Name of the approving manager.
+      example: Jane Smith
+
+    approvedAt:
+      $ref: "./common.yaml#/DateTime"
+
+    rejectionReason:
+      type: string
+      nullable: true
+      description: Reason provided when a leave request is rejected.
+      example: Project delivery scheduled during requested dates.
+
+    remarks:
+      type: string
+      nullable: true
+      description: Additional comments related to the leave request.
+      example: Supporting documents submitted.
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+    updatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - leaveId
+    - employeeId
+    - leaveType
+    - startDate
+    - endDate
+    - reason
+    - status

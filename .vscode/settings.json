@@ -1,0 +1,43 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd \"c:\\\\Users\\\\aloks\\\\OneDrive\\\\Desktop\\\\Supercard Workforce Developer Portal\"; python -m mkdocs build --strict$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"c:\\\\Users\\\\aloks\\\\OneDrive\\\\Desktop\\\\Supercard Workforce Developer Portal\"; npx @redocly/cli lint openapi/openapi\\.yaml 2>&1 \\| Select-String -Pattern \"Failed to resolve \\\\\\$ref\\|Example value must conform to the schema\\|nullable cannot be used without \\\\\"type\\\\\"\\|operation-operationId-unique\\|resolved\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    },
+    "cSpell.words": [
+        "Ahmedabad",
+        "Alok",
+        "arithmatex",
+        "axios",
+        "Bengaluru",
+        "betterem",
+        "fontawesome",
+        "HRMS",
+        "inlinehilite",
+        "javascripts",
+        "linenums",
+        "magiclink",
+        "Mintlify",
+        "mkdocs",
+        "noopener",
+        "noreferrer",
+        "Priya",
+        "pygments",
+        "pymdownx",
+        "Redocly",
+        "Roboto",
+        "Sharma",
+        "smartsymbols",
+        "SSSZ",
+        "Supercard",
+        "superfences",
+        "tasklist",
+        "Vadodara",
+        "XVCJ"
+    ]
+}

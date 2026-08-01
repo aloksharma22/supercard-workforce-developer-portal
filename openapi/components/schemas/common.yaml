@@ -1,0 +1,197 @@
+Identifier:
+  type: integer
+  format: int64
+  description: Unique identifier.
+  example: 101
+
+UUID:
+  type: string
+  format: uuid
+  description: Universally unique identifier.
+  example: "550e8400-e29b-41d4-a716-446655440000"
+
+Name:
+  type: string
+  description: Full name.
+  minLength: 1
+  maxLength: 100
+  example: "John Doe"
+
+FirstName:
+  type: string
+  minLength: 1
+  maxLength: 50
+  example: "John"
+
+LastName:
+  type: string
+  minLength: 1
+  maxLength: 50
+  example: "Doe"
+
+Email:
+  type: string
+  format: email
+  example: "john.doe@example.com"
+
+PhoneNumber:
+  type: string
+  example: "+91-9876543210"
+
+Address:
+  type: string
+  example: "221B Baker Street"
+
+City:
+  type: string
+  example: "Vadodara"
+
+State:
+  type: string
+  example: "Gujarat"
+
+Country:
+  type: string
+  example: "India"
+
+PostalCode:
+  type: string
+  example: "390001"
+
+Date:
+  type: string
+  format: date
+  example: "2026-07-31"
+
+DateTime:
+  type: string
+  format: date-time
+  example: "2026-07-31T09:30:00Z"
+
+Time:
+  type: string
+  format: time
+  example: "09:30:00"
+
+Currency:
+  type: string
+  description: ISO 4217 currency code.
+  example: "INR"
+
+Money:
+  type: number
+  format: double
+  description: Monetary amount value.
+  example: 75000.00
+
+Percentage:
+  type: number
+  format: float
+  minimum: 0
+  maximum: 100
+  example: 95.5
+
+Boolean:
+  type: boolean
+  example: true
+
+Status:
+  type: string
+  example: "Active"
+
+Gender:
+  type: string
+  enum:
+    - Male
+    - Female
+    - Other
+
+Metadata:
+  type: object
+  properties:
+    requestId:
+      type: string
+      example: "REQ-20260730-123456"
+
+    timestamp:
+      type: string
+      format: date-time
+      example: "2026-07-30T10:30:00Z"
+
+Pagination:
+  type: object
+  properties:
+    page:
+      type: integer
+      example: 1
+
+    limit:
+      type: integer
+      example: 10
+
+    totalRecords:
+      type: integer
+      example: 150
+
+    totalPages:
+      type: integer
+      example: 15
+
+    hasNextPage:
+      type: boolean
+      example: true
+
+    hasPreviousPage:
+      type: boolean
+      example: false
+
+SuccessResponse:
+  type: object
+
+  properties:
+    success:
+      type: boolean
+      example: true
+
+    message:
+      type: string
+      example: "Request completed successfully."
+
+    data:
+      type: object
+      nullable: true
+
+    metadata:
+      $ref: "#/Metadata"
+
+  required:
+    - success
+    - message
+
+PaginatedResponse:
+  type: object
+
+  properties:
+    success:
+      type: boolean
+      example: true
+
+    message:
+      type: string
+      example: "Records retrieved successfully."
+
+    data:
+      type: array
+      items:
+        type: object
+
+    pagination:
+      $ref: "#/Pagination"
+
+    metadata:
+      $ref: "#/Metadata"
+
+  required:
+    - success
+    - message
+    - data

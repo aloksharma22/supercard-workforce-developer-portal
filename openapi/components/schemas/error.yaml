@@ -1,0 +1,103 @@
+ErrorResponse:
+  type: object
+  description: Standard error response returned when an API request cannot be processed.
+
+  properties:
+
+    success:
+      type: boolean
+      description: Indicates whether the request completed successfully.
+      example: false
+
+    error:
+      $ref: "#/Error"
+
+    metadata:
+      $ref: "./common.yaml#/Metadata"
+
+  required:
+    - success
+    - error
+
+Error:
+  type: object
+  description: Detailed error information.
+
+  properties:
+
+    code:
+      type: string
+      description: Machine-readable application error code.
+      example: EMPLOYEE_NOT_FOUND
+
+    message:
+      type: string
+      description: Human-readable description of the error.
+      example: Employee with ID 101 was not found.
+
+    details:
+      type: array
+      description: Optional list of validation or processing errors.
+
+      items:
+        $ref: "#/ValidationError"
+
+    documentationUrl:
+      type: string
+      format: uri
+      description: Link to documentation describing the error.
+      example: https://your-github-username.github.io/supercard-workforce-api-docs/reference/error-codes/
+
+  required:
+    - code
+    - message
+
+ValidationError:
+  type: object
+  description: Describes an individual validation error.
+
+  properties:
+
+    field:
+      type: string
+      description: Name of the field that failed validation.
+      example: email
+
+    message:
+      type: string
+      description: Validation error message.
+      example: Email address is required.
+
+    rejectedValue:
+      type: string
+      description: Value rejected by the API.
+      nullable: true
+      example: ""
+
+  required:
+    - field
+    - message
+
+ErrorCode:
+  type: string
+  description: Standard application error codes.
+
+  enum:
+    - INVALID_REQUEST
+    - VALIDATION_ERROR
+    - INVALID_TOKEN
+    - TOKEN_EXPIRED
+    - ACCESS_DENIED
+    - EMPLOYEE_NOT_FOUND
+    - DEPARTMENT_NOT_FOUND
+    - ATTENDANCE_NOT_FOUND
+    - LEAVE_NOT_FOUND
+    - PAYROLL_NOT_FOUND
+    - REPORT_NOT_FOUND
+    - DUPLICATE_RESOURCE
+    - RESOURCE_CONFLICT
+    - RATE_LIMIT_EXCEEDED
+    - INTERNAL_SERVER_ERROR
+    - SERVICE_UNAVAILABLE
+
+  example: EMPLOYEE_NOT_FOUND

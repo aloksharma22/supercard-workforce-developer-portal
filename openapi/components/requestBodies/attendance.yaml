@@ -1,0 +1,160 @@
+ClockInRequest:
+  description: Request payload for recording employee clock-in.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          employeeId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          clockIn:
+            $ref: "../schemas/common.yaml#/DateTime"
+
+          workMode:
+            type: string
+            description: Employee work location.
+            enum:
+              - Office
+              - Remote
+              - Hybrid
+            example: Office
+
+          remarks:
+            type: string
+            nullable: true
+            description: Optional remarks.
+            example: Started morning shift.
+
+        required:
+          - employeeId
+          - clockIn
+          - workMode
+
+      examples:
+
+        ClockIn:
+
+          summary: Employee Clock-In
+
+          value:
+
+            employeeId: 101
+            clockIn: "2026-07-30T09:00:00Z"
+            workMode: Office
+            remarks: Started morning shift.
+
+ClockOutRequest:
+  description: Request payload for recording employee clock-out.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          clockOut:
+            $ref: "../schemas/common.yaml#/DateTime"
+
+          breakDuration:
+            type: integer
+            description: Total break duration in minutes.
+            example: 45
+
+          overtimeHours:
+            type: number
+            format: float
+            description: Overtime worked after scheduled hours.
+            example: 1.50
+
+          remarks:
+            type: string
+            nullable: true
+            description: Optional remarks.
+            example: Completed production deployment.
+
+        required:
+          - clockOut
+
+      examples:
+
+        ClockOut:
+
+          summary: Employee Clock-Out
+
+          value:
+
+            clockOut: "2026-07-30T18:30:00Z"
+            breakDuration: 45
+            overtimeHours: 1.50
+            remarks: Completed production deployment.
+
+UpdateAttendanceRequest:
+  description: Request payload for updating an attendance record.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          attendanceStatus:
+            type: string
+            enum:
+              - Present
+              - Absent
+              - Late
+              - Half-Day
+              - On Leave
+              - Holiday
+
+          clockIn:
+            $ref: "../schemas/common.yaml#/DateTime"
+
+          clockOut:
+            $ref: "../schemas/common.yaml#/DateTime"
+
+          breakDuration:
+            type: integer
+            example: 60
+
+          overtimeHours:
+            type: number
+            format: float
+            example: 2
+
+          workMode:
+            type: string
+            enum:
+              - Office
+              - Remote
+              - Hybrid
+
+          remarks:
+            type: string
+
+      examples:
+
+        UpdateAttendance:
+
+          summary: Update Attendance Record
+
+          value:
+
+            attendanceStatus: Present
+            clockOut: "2026-07-30T18:30:00Z"
+            breakDuration: 60
+            overtimeHours: 2
+            workMode: Office
+            remarks: Attendance verified by manager.

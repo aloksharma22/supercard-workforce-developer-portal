@@ -1,0 +1,229 @@
+CreateEmployeeRequest:
+  description: Request payload for creating a new employee.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          employeeCode:
+            type: string
+            description: Unique employee code.
+            example: EMP-1001
+
+          firstName:
+            type: string
+            description: Employee's first name.
+            example: John
+
+          lastName:
+            type: string
+            description: Employee's last name.
+            example: Doe
+
+          email:
+            type: string
+            format: email
+            description: Official email address.
+            example: john.doe@supercard.com
+
+          phone:
+            type: string
+            description: Employee's contact number.
+            example: "+91-9876543210"
+
+          dateOfBirth:
+            $ref: "../schemas/common.yaml#/Date"
+
+          gender:
+            type: string
+            enum:
+              - Male
+              - Female
+              - Other
+            example: Male
+
+          designation:
+            type: string
+            description: Employee designation.
+            example: Software Engineer
+
+          departmentId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          managerId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          employmentType:
+            type: string
+            enum:
+              - Full-Time
+              - Part-Time
+              - Contract
+              - Intern
+            example: Full-Time
+
+          joiningDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          salary:
+            $ref: "../schemas/common.yaml#/Money"
+
+          address:
+            type: object
+
+            properties:
+
+              line1:
+                type: string
+                example: 101 Business Park
+
+              line2:
+                type: string
+                nullable: true
+                example: Tower B
+
+              city:
+                type: string
+                example: Vadodara
+
+              state:
+                type: string
+                example: Gujarat
+
+              postalCode:
+                type: string
+                example: "390010"
+
+              country:
+                type: string
+                example: India
+
+        required:
+          - employeeCode
+          - firstName
+          - lastName
+          - email
+          - designation
+          - departmentId
+          - employmentType
+          - joiningDate
+
+      examples:
+
+        CreateEmployee:
+
+          summary: Create a new employee
+
+          value:
+
+            employeeCode: EMP-1001
+            firstName: John
+            lastName: Doe
+            email: john.doe@supercard.com
+            phone: "+91-9876543210"
+            dateOfBirth: "1998-06-15"
+            gender: Male
+            designation: Software Engineer
+            departmentId: 10
+            managerId: 2
+            employmentType: Full-Time
+            joiningDate: "2026-07-30"
+            salary: 75000
+            address:
+              line1: 101 Business Park
+              line2: Tower B
+              city: Vadodara
+              state: Gujarat
+              postalCode: "390010"
+              country: India
+
+UpdateEmployeeRequest:
+  description: Request payload for updating an existing employee.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          firstName:
+            type: string
+
+          lastName:
+            type: string
+
+          email:
+            type: string
+            format: email
+
+          phone:
+            type: string
+
+          designation:
+            type: string
+
+          departmentId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          managerId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          employmentType:
+            type: string
+            enum:
+              - Full-Time
+              - Part-Time
+              - Contract
+              - Intern
+
+          salary:
+            $ref: "../schemas/common.yaml#/Money"
+
+          status:
+            $ref: "../schemas/common.yaml#/Status"
+
+          address:
+            type: object
+
+            properties:
+
+              line1:
+                type: string
+
+              line2:
+                type: string
+                nullable: true
+
+              city:
+                type: string
+
+              state:
+                type: string
+
+              postalCode:
+                type: string
+
+              country:
+                type: string
+
+      examples:
+
+        UpdateEmployee:
+
+          summary: Update employee information
+
+          value:
+
+            designation: Senior Software Engineer
+            departmentId: 10
+            salary: 90000
+            status: Active
+            phone: "+91-9876543210"

@@ -1,0 +1,120 @@
+Success:
+  description: Request completed successfully.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/common.yaml#/SuccessResponse"
+
+Created:
+  description: Resource created successfully.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/common.yaml#/SuccessResponse"
+
+NoContent:
+  description: Request completed successfully with no response body.
+
+BadRequest:
+  description: The request is invalid or malformed.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+Unauthorized:
+  description: Authentication failed or access token is missing or invalid.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+Forbidden:
+  description: The authenticated user does not have permission to perform this operation.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+NotFound:
+  description: The requested resource could not be found.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+Conflict:
+  description: The request conflicts with the current state of the resource.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+UnprocessableEntity:
+  description: The request failed business validation.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+TooManyRequests:
+  description: API rate limit exceeded.
+  headers:
+    Retry-After:
+      description: Number of seconds to wait before retrying the request.
+      schema:
+        type: integer
+        example: 60
+    X-RateLimit-Limit:
+      description: Maximum number of requests allowed during the current rate limit window.
+      schema:
+        type: integer
+        example: 100
+    X-RateLimit-Remaining:
+      description: Number of requests remaining in the current rate limit window.
+      schema:
+        type: integer
+        example: 0
+    X-RateLimit-Reset:
+      description: Unix timestamp when the rate limit window resets.
+      schema:
+        type: integer
+        example: 1722326400
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+InternalServerError:
+  description: An unexpected server error occurred.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+ServiceUnavailable:
+  description: The service is temporarily unavailable.
+  headers:
+    Retry-After:
+      description: Number of seconds to wait before retrying the request.
+      schema:
+        type: integer
+        example: 120
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+ValidationError:
+  description: One or more validation errors occurred.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/error.yaml#/ErrorResponse"
+
+PaginationResponse:
+  description: Successful paginated response.
+  content:
+    application/json:
+      schema:
+        $ref: "./schemas/common.yaml#/PaginatedResponse"

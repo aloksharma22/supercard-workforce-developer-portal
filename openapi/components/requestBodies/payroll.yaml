@@ -1,0 +1,160 @@
+GeneratePayrollRequest:
+  description: Request payload for generating payroll for one or more employees.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          payrollPeriod:
+            type: string
+            description: Payroll period in YYYY-MM format.
+            example: "2026-07"
+
+          employeeIds:
+            type: array
+            description: List of employee IDs to include in payroll generation.
+
+            items:
+              $ref: "../schemas/common.yaml#/Identifier"
+
+          payDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          remarks:
+            type: string
+            nullable: true
+            description: Optional payroll remarks.
+            example: Monthly payroll for July 2026.
+
+        required:
+          - payrollPeriod
+          - employeeIds
+          - payDate
+
+      examples:
+
+        GeneratePayroll:
+
+          summary: Generate Monthly Payroll
+
+          value:
+
+            payrollPeriod: "2026-07"
+            employeeIds:
+              - 101
+              - 102
+              - 103
+            payDate: "2026-07-31"
+            remarks: Monthly payroll for July 2026.
+
+UpdatePayrollRequest:
+  description: Request payload for updating an existing payroll record.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          basicSalary:
+            $ref: "../schemas/common.yaml#/Money"
+
+          allowances:
+            $ref: "../schemas/common.yaml#/Money"
+
+          bonus:
+            $ref: "../schemas/common.yaml#/Money"
+
+          overtimePay:
+            $ref: "../schemas/common.yaml#/Money"
+
+          deductions:
+            $ref: "../schemas/common.yaml#/Money"
+
+          tax:
+            $ref: "../schemas/common.yaml#/Money"
+
+          providentFund:
+            $ref: "../schemas/common.yaml#/Money"
+
+          paymentStatus:
+            type: string
+            enum:
+              - Pending
+              - Processing
+              - Paid
+              - Failed
+
+          paymentMethod:
+            type: string
+            enum:
+              - Bank Transfer
+              - Cheque
+              - Cash
+
+          remarks:
+            type: string
+            nullable: true
+            description: Additional payroll remarks.
+
+      examples:
+
+        UpdatePayroll:
+
+          summary: Update Payroll Record
+
+          value:
+
+            basicSalary: 65000
+            allowances: 12000
+            bonus: 5000
+            overtimePay: 2500
+            deductions: 3000
+            tax: 6500
+            providentFund: 1800
+            paymentStatus: Paid
+            paymentMethod: Bank Transfer
+            remarks: Performance bonus processed.
+
+SalarySummaryRequest:
+  description: Request payload for retrieving salary summary.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          employeeId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          financialYear:
+            type: string
+            description: Financial year.
+            example: "2026-2027"
+
+        required:
+          - employeeId
+          - financialYear
+
+      examples:
+
+        SalarySummary:
+
+          summary: Retrieve Salary Summary
+
+          value:
+
+            employeeId: 101
+            financialYear: "2026-2027"

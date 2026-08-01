@@ -1,0 +1,366 @@
+# ==============================================================================
+# Supercard Workforce Developer Portal
+# Enterprise-grade MkDocs Material Configuration
+# ==============================================================================
+
+site_name: Supercard Workforce Developer Portal
+site_description: Enterprise REST API Developer Documentation built with OpenAPI 3.1, MkDocs Material, and Redocly.
+site_author: Alok Sharma
+site_url: https://your-github-username.github.io/supercard-workforce-developer-portal/
+
+repo_name: supercard-workforce-developer-portal
+repo_url: https://github.com/your-github-username/supercard-workforce-developer-portal
+
+edit_uri: ""
+
+copyright: |
+  Copyright © 2026 Supercard Inc.
+  All rights reserved.
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+
+  language: en
+
+  logo: assets/logos/logo.png
+  favicon: assets/logos/favicon.png
+
+  icon:
+
+    repo: fontawesome/brands/github
+
+  palette:
+
+    - scheme: default
+
+      primary: indigo
+      accent: blue
+
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    - scheme: slate
+
+      primary: indigo
+      accent: blue
+
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+  font:
+
+    text: Roboto
+    code: Roboto Mono
+
+  features:
+
+    # -------------------------------------------------------
+    # Navigation
+    # -------------------------------------------------------
+
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.instant.prefetch
+
+    - navigation.tabs
+    - navigation.tabs.sticky
+
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+
+    - navigation.path
+    - navigation.top
+
+    - navigation.tracking
+
+    - navigation.footer
+
+    - navigation.prune
+
+    # -------------------------------------------------------
+    # Search
+    # -------------------------------------------------------
+
+    - search.highlight
+    - search.suggest
+    - search.share
+
+    # -------------------------------------------------------
+    # Table of Contents
+    # -------------------------------------------------------
+
+    - toc.follow
+
+    # -------------------------------------------------------
+    # Content
+    # -------------------------------------------------------
+
+    - content.code.copy
+    - content.code.annotate
+    - content.code.select
+
+    - content.tabs.link
+
+    - content.action.edit
+    - content.action.view
+
+    - content.tooltips
+
+plugins:
+
+  - search
+
+# ==============================================================================
+# Continue with Part 2
+# ==============================================================================
+
+# ==============================================================================
+# Markdown Extensions
+# ==============================================================================
+
+markdown_extensions:
+
+  # Basic Markdown
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - def_list
+
+  # Table of Contents
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+  # Syntax Highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+  - pymdownx.inlinehilite
+
+  - pymdownx.snippets
+
+  # SuperFences
+  - pymdownx.superfences:
+
+      custom_fences:
+
+        - name: mermaid
+          class: mermaid
+
+        - name: sequence
+          class: mermaid
+
+        - name: flowchart
+          class: mermaid
+
+  # Tabs
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  # Details
+  - pymdownx.details
+
+  # Better Lists
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  # Better Formatting
+  - pymdownx.mark
+  - pymdownx.keys
+  - pymdownx.tilde
+  - pymdownx.caret
+  - pymdownx.magiclink
+  - pymdownx.betterem
+  - pymdownx.smartsymbols
+
+  # Extra Formatting
+  - pymdownx.arithmatex:
+      generic: true
+
+# ==============================================================================
+# Extra CSS
+# ==============================================================================
+
+extra_css:
+
+  - stylesheets/extra.css
+
+# ==============================================================================
+# Extra JavaScript
+# ==============================================================================
+
+extra_javascript:
+
+  - https://unpkg.com/mermaid/dist/mermaid.min.js
+  - javascripts/extra.js
+
+# ==============================================================================
+# Extra Configuration
+# ==============================================================================
+
+extra:
+
+  generator: false
+
+  homepage: /
+
+  version:
+
+    provider: mike
+
+  social:
+
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-github-username
+
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/your-profile
+
+    - icon: fontawesome/solid/globe
+      link: https://your-portfolio.com
+
+  analytics:
+
+    provider: google
+
+    property: G-XXXXXXXXXX
+
+# ==============================================================================
+# Validation
+# ==============================================================================
+
+validation:
+
+  omitted_files: warn
+
+  absolute_links: warn
+
+  unrecognized_links: warn
+
+# ==============================================================================
+# Watch
+# ==============================================================================
+
+watch:
+
+  - docs
+  - openapi
+  - mkdocs.yml
+
+# ==============================================================================
+# End of Part 2
+# ==============================================================================
+
+# ==============================================================================
+# Navigation
+# ==============================================================================
+
+nav:
+
+  - Home: index.md
+
+  - Getting Started:
+
+      - Overview: getting-started.md
+      - Authentication: authentication.md
+      - Quick Start: quickstart.md
+      - API Explorer: open-api-explorer.md
+
+  - API Reference:
+
+      - Employees:
+
+          - Overview: api-reference/employees/overview.md
+          - List Employees: api-reference/employees/list-employee.md
+          - Retrieve Employee: api-reference/employees/retrieve-employee.md
+          - Create Employee: api-reference/employees/create-employee.md
+          - Update Employee: api-reference/employees/update-employee.md
+          - Delete Employee: api-reference/employees/delete-employee.md
+
+      - Departments:
+
+          - Overview: api-reference/departments/overview.md
+          - List Departments: api-reference/departments/list-departments.md
+          - Retrieve Department: api-reference/departments/retrieve-department.md
+          - Create Department: api-reference/departments/create-department.md
+          - Update Department: api-reference/departments/update-department.md
+          - Delete Department: api-reference/departments/delete-department.md
+
+      - Attendance:
+
+          - Overview: api-reference/attendance/overview.md
+          - List Attendance: api-reference/attendance/list-attendance.md
+          - Retrieve Attendance: api-reference/attendance/retrieve-attendance.md
+          - Clock In: api-reference/attendance/clock-in.md
+          - Clock Out: api-reference/attendance/clock-out.md
+          - Attendance Summary: api-reference/attendance/attendance-summary.md
+          - Attendance Report: api-reference/attendance/attendance-report.md
+
+      - Leave Management:
+
+          - Overview: api-reference/leaves/overview.md
+          - Apply Leave: api-reference/leaves/apply-leave.md
+          - Leave Balance: api-reference/leaves/leave-balance.md
+          - List Leaves: api-reference/leaves/list-leaves.md
+          - Retrieve Leave Request: api-reference/leaves/retrieve-leave-request.md
+          - Approve Leave: api-reference/leaves/approve-leave.md
+          - Reject Leave: api-reference/leaves/reject-leave.md
+          - Cancel Leave: api-reference/leaves/cancel-leave.md
+
+      - Payroll:
+
+          - Overview: api-reference/payroll/overview.md
+          - List Payroll: api-reference/payroll/list-payroll.md
+          - Payroll History: api-reference/payroll/payroll-history.md
+          - Salary Summary: api-reference/payroll/salary-summary.md
+          - Download Payslip: api-reference/payroll/download-payslip.md
+
+      - Reports:
+
+          - Overview: api-reference/reports/overview.md
+          - Department Report: api-reference/reports/department-report.md
+          - Attendance Report: api-reference/reports/attendance-report.md
+          - Payroll Report: api-reference/reports/payroll-report.md
+          - Export Report: api-reference/reports/export-report.md
+
+  - Concepts:
+
+      - Pagination: concepts/pagination.md
+      - Filtering: concepts/filtering.md
+      - Sorting: concepts/sorting.md
+      - Rate Limiting: concepts/rate-limiting.md
+      - Versioning: concepts/versioning.md
+      - Idempotency: concepts/idempotency.md
+      - Error Handling: concepts/error-handling.md
+      - Webhooks: concepts/webhooks.md
+
+  - Reference:
+
+      - HTTP Headers: reference/headers.md
+      - HTTP Status Codes: reference/status-codes.md
+      - Error Codes: reference/error-codes.md
+      - Response Format: reference/response-format.md
+      - Date Formats: reference/date-formats.md
+      - Glossary: reference/glossary.md
+
+  - SDK Guide: sdk.md
+
+  - FAQ: faq.md
+
+  - Errors: errors.md
+
+  - Webhooks: webhooks.md
+
+  - Changelog: changelog.md
+
+  - Release Notes: release-notes.md

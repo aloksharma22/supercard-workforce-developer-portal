@@ -1,0 +1,34 @@
+BearerAuth:
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+
+  description: |
+    OAuth 2.0 Bearer Token authentication.
+
+    Include the access token in the `Authorization` request header using the following format:
+
+    ```
+    Authorization: Bearer ACCESS_TOKEN
+    ```
+
+    ## Authentication Flow
+
+    1. Obtain an OAuth 2.0 access token from the authorization server.
+    2. Include the token in the `Authorization` header.
+    3. The API validates the token before processing the request.
+    4. If the token is invalid or expired, the API returns **401 Unauthorized**.
+
+    ## Example
+
+    ```http
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    ```
+
+    ## Security Recommendations
+
+    - Always use HTTPS.
+    - Never expose tokens in URLs.
+    - Store tokens securely.
+    - Rotate tokens regularly.
+    - Do not commit credentials to source control.

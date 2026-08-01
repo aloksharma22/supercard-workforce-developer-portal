@@ -1,0 +1,111 @@
+GenerateReportRequest:
+  description: Request payload for generating a workforce report.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          reportType:
+            type: string
+            description: Type of report to generate.
+            enum:
+              - Attendance
+              - Payroll
+              - Employee
+              - Department
+              - Leave
+            example: Attendance
+
+          format:
+            type: string
+            description: Desired output format.
+            enum:
+              - PDF
+              - Excel
+              - CSV
+              - JSON
+            example: PDF
+
+          startDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          endDate:
+            $ref: "../schemas/common.yaml#/Date"
+
+          departmentId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          employeeId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          includeInactive:
+            type: boolean
+            description: Include inactive records in the report.
+            default: false
+            example: false
+
+        required:
+          - reportType
+          - format
+          - startDate
+          - endDate
+
+      examples:
+
+        GenerateAttendanceReport:
+
+          summary: Generate Attendance Report
+
+          value:
+
+            reportType: Attendance
+            format: PDF
+            startDate: "2026-07-01"
+            endDate: "2026-07-31"
+            departmentId: 10
+            includeInactive: false
+
+ExportReportRequest:
+  description: Request payload for exporting a previously generated report.
+  required: true
+
+  content:
+    application/json:
+
+      schema:
+        type: object
+
+        properties:
+
+          reportId:
+            $ref: "../schemas/common.yaml#/Identifier"
+
+          format:
+            type: string
+            description: Export format.
+            enum:
+              - PDF
+              - Excel
+              - CSV
+              - JSON
+            example: Excel
+
+        required:
+          - reportId
+          - format
+
+      examples:
+
+        ExportReport:
+
+          summary: Export Existing Report
+
+          value:
+
+            reportId: 1001
+            format: Excel

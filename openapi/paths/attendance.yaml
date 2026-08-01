@@ -1,0 +1,665 @@
+attendance:
+
+  get:
+    tags:
+      - Attendance
+
+    summary: List Attendance Records
+
+    description: |
+      Retrieves a paginated list of employee attendance records.
+
+      Supports pagination, searching, filtering, sorting,
+      and date range filtering.
+
+      This endpoint is commonly used by HR administrators,
+      managers, dashboards, and reporting applications.
+
+    operationId: listAttendance
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/Page"
+
+      - $ref: "../components/parameters.yaml#/Limit"
+
+      - $ref: "../components/parameters.yaml#/Search"
+
+      - $ref: "../components/parameters.yaml#/Status"
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - $ref: "../components/parameters.yaml#/Sort"
+
+      - $ref: "../components/parameters.yaml#/Order"
+
+    responses:
+
+      "200":
+
+        description: Attendance records retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/PaginatedResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: array
+
+                      items:
+                        $ref: "../components/schemas/attendance.yaml#/Attendance"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/AttendanceList"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+clockIn:
+
+  post:
+    tags:
+      - Attendance
+
+    summary: Clock In Employee
+
+    description: |
+      Records the employee's clock-in time.
+
+      This endpoint is typically called when an employee starts
+      their workday.
+
+      The API validates the employee, records the clock-in time,
+      and creates a new attendance record for the day.
+
+    operationId: clockInEmployee
+
+    security:
+      - BearerAuth: []
+
+    requestBody:
+      $ref: "../components/requestBodies/attendance.yaml#/ClockInRequest"
+
+    responses:
+
+      "201":
+
+        description: Clock-in recorded successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/attendance.yaml#/Attendance"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/ClockIn"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+clockOut:
+  put:
+    tags:
+      - Attendance
+
+    summary: Clock Out Employee
+
+    description: |
+      Records the employee's clock-out time for the current attendance record.
+
+      This endpoint finalizes the attendance entry by calculating
+      total working hours, overtime, and break duration.
+
+      An employee must have an active clock-in before a clock-out
+      request can be processed.
+
+    operationId: clockOutEmployee
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/AttendanceId"
+
+    requestBody:
+      $ref: "../components/requestBodies/attendance.yaml#/ClockOutRequest"
+
+    responses:
+
+      "200":
+
+        description: Clock-out recorded successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/attendance.yaml#/Attendance"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/ClockOut"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "409":
+        $ref: "../components/responses.yaml#/Conflict"
+
+      "422":
+        $ref: "../components/responses.yaml#/ValidationError"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request PUT \
+            --url https://api.supercard.com/v1/attendance/1001/clock-out \
+            --header "Authorization: Bearer ACCESS_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{
+              "clockOut":"2026-07-30T18:30:00Z",
+              "breakDuration":45,
+              "overtimeHours":1.5,
+              "remarks":"Completed production deployment."
+            }'
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/attendance/1001/clock-out",
+            {
+              method: "PUT",
+              headers: {
+                "Authorization": "Bearer ACCESS_TOKEN",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                clockOut: "2026-07-30T18:30:00Z",
+                breakDuration: 45,
+                overtimeHours: 1.5,
+                remarks: "Completed production deployment."
+              })
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.put(
+              "https://api.supercard.com/v1/attendance/1001/clock-out",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN",
+                  "Content-Type": "application/json"
+              },
+              json={
+                  "clockOut": "2026-07-30T18:30:00Z",
+                  "breakDuration": 45,
+                  "overtimeHours": 1.5,
+                  "remarks": "Completed production deployment."
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.put(
+            "https://api.supercard.com/v1/attendance/1001/clock-out",
+            {
+              clockOut: "2026-07-30T18:30:00Z",
+              breakDuration: 45,
+              overtimeHours: 1.5,
+              remarks: "Completed production deployment."
+            },
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data); 
+
+attendanceById:
+
+  get:
+    tags:
+      - Attendance
+
+    summary: Retrieve Attendance Record
+
+    description: |
+      Retrieves detailed information for a specific attendance record.
+
+      This endpoint returns the complete attendance information
+      including clock-in time, clock-out time, working hours,
+      overtime, break duration, attendance status, and remarks.
+
+      It is commonly used by HR administrators, managers,
+      payroll systems, and employee self-service portals.
+
+    operationId: getAttendanceById
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/AttendanceId"
+
+    responses:
+
+      "200":
+
+        description: Attendance record retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+
+              allOf:
+
+                - $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+                - type: object
+
+                  properties:
+
+                    data:
+                      $ref: "../components/schemas/attendance.yaml#/Attendance"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/Attendance"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "404":
+        $ref: "../components/responses.yaml#/NotFound"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url https://api.supercard.com/v1/attendance/1001 \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/attendance/1001",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/attendance/1001",
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/attendance/1001",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+
+attendanceSummary:
+
+  get:
+    tags:
+      - Attendance
+
+    summary: Attendance Summary
+
+    description: |
+      Retrieves summarized attendance statistics for employees.
+
+      This endpoint provides high-level attendance metrics that are
+      commonly used in dashboards, HR analytics, and management reports.
+
+      Summary statistics include employee attendance,
+      absences, late arrivals, leave counts,
+      and overall attendance percentage.
+
+    operationId: getAttendanceSummary
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - $ref: "../components/parameters.yaml#/Department"
+
+    responses:
+
+      "200":
+
+        description: Attendance summary retrieved successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+              $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/AttendanceSummary"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+attendanceReport:
+
+  get:
+    tags:
+      - Attendance
+
+    summary: Generate Attendance Report
+
+    description: |
+      Generates an attendance report for the specified reporting period.
+
+      Reports can be generated for a department or the entire
+      organization and exported in multiple formats.
+
+      This endpoint is typically used by HR teams,
+      managers, payroll administrators, and auditors.
+
+    operationId: generateAttendanceReport
+
+    security:
+      - BearerAuth: []
+
+    parameters:
+
+      - $ref: "../components/parameters.yaml#/StartDate"
+
+      - $ref: "../components/parameters.yaml#/EndDate"
+
+      - $ref: "../components/parameters.yaml#/Department"
+
+    responses:
+
+      "200":
+
+        description: Attendance report generated successfully.
+
+        content:
+
+          application/json:
+
+            schema:
+              $ref: "../components/schemas/common.yaml#/SuccessResponse"
+
+            examples:
+
+              Success:
+                $ref: "../components/examples/attendance.yaml#/AttendanceReport"
+
+      "400":
+        $ref: "../components/responses.yaml#/BadRequest"
+
+      "401":
+        $ref: "../components/responses.yaml#/Unauthorized"
+
+      "403":
+        $ref: "../components/responses.yaml#/Forbidden"
+
+      "429":
+        $ref: "../components/responses.yaml#/TooManyRequests"
+
+      "500":
+        $ref: "../components/responses.yaml#/InternalServerError"
+
+      "503":
+        $ref: "../components/responses.yaml#/ServiceUnavailable"
+
+    x-codeSamples:
+
+      - lang: cURL
+        label: cURL
+
+        source: |
+          curl --request GET \
+            --url "https://api.supercard.com/v1/attendance/report?startDate=2026-07-01&endDate=2026-07-31" \
+            --header "Authorization: Bearer ACCESS_TOKEN"
+
+      - lang: JavaScript
+        label: JavaScript
+
+        source: |
+          const response = await fetch(
+            "https://api.supercard.com/v1/attendance/report?startDate=2026-07-01&endDate=2026-07-31",
+            {
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          const data = await response.json();
+
+      - lang: Python
+        label: Python
+
+        source: |
+          import requests
+
+          response = requests.get(
+              "https://api.supercard.com/v1/attendance/report",
+              params={
+                  "startDate": "2026-07-01",
+                  "endDate": "2026-07-31"
+              },
+              headers={
+                  "Authorization": "Bearer ACCESS_TOKEN"
+              }
+          )
+
+          print(response.json())
+
+      - lang: Node.js
+        label: Node.js
+
+        source: |
+          import axios from "axios";
+
+          const response = await axios.get(
+            "https://api.supercard.com/v1/attendance/report",
+            {
+              params: {
+                startDate: "2026-07-01",
+                endDate: "2026-07-31"
+              },
+              headers: {
+                Authorization: "Bearer ACCESS_TOKEN"
+              }
+            }
+          );
+
+          console.log(response.data);
+

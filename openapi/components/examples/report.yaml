@@ -1,0 +1,186 @@
+Report:
+  summary: Report Resource
+
+  value:
+
+    success: true
+    message: Report retrieved successfully.
+
+    data:
+
+      reportId: 9001
+      reportName: Monthly Attendance Report
+      reportType: Attendance
+      generatedBy: 2
+      generatedByName: Jane Smith
+      generatedAt: "2026-07-31T18:30:00Z"
+
+      reportPeriod:
+        startDate: "2026-07-01"
+        endDate: "2026-07-31"
+
+      format: PDF
+      status: Completed
+
+      downloadUrl: https://api.supercard.com/v1/reports/9001/download
+
+      fileSize: 1048576
+      recordCount: 542
+
+      expiresAt: "2026-08-07T23:59:59Z"
+      createdAt: "2026-07-31T18:30:00Z"
+
+    metadata:
+
+      requestId: REQ-20260731-RP12345
+      timestamp: "2026-07-31T19:30:00Z"
+
+ReportList:
+  summary: Report Collection
+
+  value:
+
+    success: true
+    message: Reports retrieved successfully.
+
+    data:
+
+      - reportId: 9001
+        reportName: Monthly Attendance Report
+        reportType: Attendance
+        generatedAt: "2026-07-31T18:30:00Z"
+        format: PDF
+        status: Completed
+
+      - reportId: 9002
+        reportName: July Payroll Report
+        reportType: Payroll
+        generatedAt: "2026-07-31T19:15:00Z"
+        format: Excel
+        status: Completed
+
+    pagination:
+
+      page: 1
+      limit: 25
+      totalRecords: 2
+      totalPages: 1
+      hasNextPage: false
+      hasPreviousPage: false
+
+    metadata:
+
+      requestId: REQ-20260731-RP12345
+      timestamp: "2026-07-31T19:30:00Z"
+
+GenerateReport:
+  summary: Generate Report Response
+
+  value:
+
+    success: true
+    message: Report generated successfully.
+
+    data:
+
+      reportId: 9003
+      reportName: Employee Performance Report
+      reportType: Employee
+      generatedAt: "2026-08-01T10:00:00Z"
+      format: PDF
+      status: Processing
+
+    metadata:
+
+      requestId: REQ-20260801-RP23456
+      timestamp: "2026-08-01T10:00:01Z"
+
+AttendanceReport:
+  summary: Attendance Report
+
+  value:
+
+    success: true
+    message: Attendance report generated successfully.
+
+    data:
+
+      reportId: 9004
+      reportName: Monthly Attendance Report
+      reportType: Attendance
+      generatedAt: "2026-08-01T11:00:00Z"
+      format: PDF
+      status: Completed
+      downloadUrl: https://api.supercard.com/v1/reports/9004/download
+
+    metadata:
+
+      requestId: REQ-20260801-RP34567
+      timestamp: "2026-08-01T11:00:00Z"
+
+PayrollReport:
+  summary: Payroll Report
+
+  value:
+
+    success: true
+    message: Payroll report generated successfully.
+
+    data:
+
+      reportId: 9005
+      reportName: Monthly Payroll Report
+      reportType: Payroll
+      generatedAt: "2026-08-01T11:30:00Z"
+      format: Excel
+      status: Completed
+      downloadUrl: https://api.supercard.com/v1/reports/9005/download
+
+    metadata:
+
+      requestId: REQ-20260801-RP45678
+      timestamp: "2026-08-01T11:30:00Z"
+
+DepartmentReport:
+  summary: Department Report
+
+  value:
+
+    success: true
+    message: Department report generated successfully.
+
+    data:
+
+      reportId: 9006
+      reportName: Department Utilization Report
+      reportType: Department
+      generatedAt: "2026-08-01T12:00:00Z"
+      format: CSV
+      status: Completed
+      downloadUrl: https://api.supercard.com/v1/reports/9006/download
+
+    metadata:
+
+      requestId: REQ-20260801-RP56789
+      timestamp: "2026-08-01T12:00:00Z"
+
+ExportReport:
+  summary: Export Report
+
+  value:
+
+    success: true
+    message: Report exported successfully.
+
+    data:
+
+      reportId: 9001
+      fileName: monthly-attendance-report-july-2026.pdf
+      format: PDF
+      downloadUrl: https://api.supercard.com/v1/reports/9001/download
+      expiresAt: "2026-08-07T23:59:59Z"
+
+    metadata:
+
+      requestId: REQ-20260801-RP67890
+      timestamp: "2026-08-01T12:30:00Z"

@@ -1,0 +1,101 @@
+Report:
+  type: object
+  description: Represents a generated workforce report.
+
+  properties:
+
+    reportId:
+      $ref: "./common.yaml#/Identifier"
+
+    reportName:
+      type: string
+      description: Name of the generated report.
+      example: Monthly Attendance Report
+
+    reportType:
+      type: string
+      description: Type of report generated.
+      enum:
+        - Attendance
+        - Payroll
+        - Employee
+        - Department
+        - Leave
+      example: Attendance
+
+    generatedBy:
+      $ref: "./common.yaml#/Identifier"
+
+    generatedByName:
+      type: string
+      readOnly: true
+      description: Name of the user who generated the report.
+      example: Alok Sharma
+
+    generatedAt:
+      $ref: "./common.yaml#/DateTime"
+
+    reportPeriod:
+
+      type: object
+
+      description: Reporting period.
+
+      properties:
+
+        startDate:
+          $ref: "./common.yaml#/Date"
+
+        endDate:
+          $ref: "./common.yaml#/Date"
+
+    format:
+      type: string
+      description: Export format of the report.
+      enum:
+        - PDF
+        - Excel
+        - CSV
+        - JSON
+      example: PDF
+
+    status:
+      type: string
+      description: Current report generation status.
+      enum:
+        - Pending
+        - Processing
+        - Completed
+        - Failed
+      example: Completed
+
+    downloadUrl:
+      type: string
+      format: uri
+      nullable: true
+      description: URL used to download the generated report.
+      example: https://api.supercard.com/reports/1001/download
+
+    fileSize:
+      type: integer
+      description: Size of the generated report in bytes.
+      example: 1048576
+
+    recordCount:
+      type: integer
+      description: Number of records included in the report.
+      example: 542
+
+    expiresAt:
+      $ref: "./common.yaml#/DateTime"
+
+    createdAt:
+      $ref: "./common.yaml#/DateTime"
+
+  required:
+    - reportId
+    - reportName
+    - reportType
+    - generatedAt
+    - format
+    - status
