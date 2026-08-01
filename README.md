@@ -165,13 +165,20 @@ redocly lint openapi/openapi.yaml
 
 > Add screenshots of your documentation portal here.
 
-Example:
+<h3>🏠 Homepage</h3>
+<p align="center">
+  <img src="docs/assets/images/homepage-snapshot.png" width="900">
+</p>
 
-```
-docs/images/homepage.png
-docs/images/api-reference.png
-docs/images/employees-api.png
-```
+<h3>📖 API Reference</h3>
+<p align="center">
+  <img src="docs/assets/images/api-reference-snapshot.png" width="900">
+</p>
+
+<h3>🧠 Concepts</h3>
+<p align="center">
+  <img src="docs/assets/images/concepts-snapshot.png" width="900">
+</p>
 
 ---
 
@@ -204,7 +211,7 @@ This project demonstrates:
 
 **Alok Sharma**
 
-- GitHub: https://github.com/<aloksharma22>
+- GitHub: https://github.com/aloksharma22
 
 ---
 
