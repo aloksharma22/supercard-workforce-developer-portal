@@ -193,12 +193,10 @@ This project demonstrates:
 ## 📈 Future Improvements
 
 - Interactive API Console
-- Webhook Documentation
 - SDK Documentation
 - Postman Collection Download
 - API Changelog
 - Versioned Documentation
-- Dark/Light Theme Toggle
 
 ---
 
@@ -206,8 +204,7 @@ This project demonstrates:
 
 **Alok Sharma**
 
-- GitHub: https://github.com/<your-username>
-- LinkedIn: https://www.linkedin.com/in/<your-linkedin>
+- GitHub: https://github.com/<aloksharma22>
 
 ---
 
