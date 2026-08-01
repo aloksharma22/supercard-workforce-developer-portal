@@ -6,7 +6,7 @@
 site_name: Supercard Workforce Developer Portal
 site_description: Enterprise REST API Developer Documentation built with OpenAPI 3.1, MkDocs Material, and Redocly.
 site_author: Alok Sharma
-site_url: https://your-github-username.github.io/supercard-workforce-developer-portal/
+site_url: https://aloksharma22.github.io/supercard-workforce-developer-portal/
 
 repo_name: GitHub Repository
 repo_url: https://github.com/aloksharma22/supercard-workforce-developer-portal
@@ -221,13 +221,10 @@ extra:
   social:
 
     - icon: fontawesome/brands/github
-      link: https://github.com/your-github-username
-
-    - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/your-profile
-
+      link: https://github.com/aloksharma22 
+      
     - icon: fontawesome/solid/globe
-      link: https://your-portfolio.com
+
 
   analytics:
 
