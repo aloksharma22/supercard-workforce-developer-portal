@@ -106,7 +106,7 @@ The Supercard Workforce API follows modern REST API best practices.
 
 ## Base URL
 
-```text
+```http
 https://api.supercard.com/v1
 ```
 
